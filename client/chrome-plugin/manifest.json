@@ -1,0 +1,22 @@
+{
+    "name": "Hostd",
+    "icons": {
+        "16": "icons/icon.png",
+        "24": "icons/icon.png",
+        "32": "icons/icon.png",
+        "128": "icons/icon.png"
+    },
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "permissions": ["tabs",
+        "http://setdns.diors.it/",
+        "unlimitedStorage"
+    ],
+    "description": "Saving your time when you switch domain-ip mapping (Hosts file) between different environment. Awesome host file editor !",
+
+    "browser_action": {
+        "default_icon": "icons/icon.png",
+        "default_popup": "popup.html"
+    }
+
+}
