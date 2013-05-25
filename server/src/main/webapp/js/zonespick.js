@@ -6,17 +6,26 @@
  * To change this template use File | Settings | File Templates.
  */
 $(function () {
-    bindDashboardApply();
+    bindSlideDown();
 });
 
-function bindDashboardApply() {
+function bindSlideDown() {
     $("a#link").bind("click", function () {
         $("#hiden").slideDown("fast");
+        $("i#link-icon").removeClass("icon-double-angle-down");
+        $("i#link-icon").addClass("icon-double-angle-up")
         $("a#link").unbind("click");
-        $("a#link").bind("click", function () {
-            $("#hiden").slideUp("fast");
-            $("a#link").unbind("click");
-            bindDashboardApply();
-        });
+        bindSlideUp();
+
+    });
+}
+
+function bindSlideUp() {
+    $("a#link").bind("click", function () {
+        $("#hiden").slideUp("fast");
+        $("i#link-icon").removeClass("icon-double-angle-up");
+        $("i#link-icon").addClass("icon-double-angle-down")
+        $("a#link").unbind("click");
+        bindSlideDown();
     });
 }
