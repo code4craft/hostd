@@ -6,7 +6,7 @@ package us.codecraft.blackhole.suite.model;
  */
 public class UserPassport {
 
-    private long id;
+    private int id;
 
     private String username;
 
@@ -16,8 +16,18 @@ public class UserPassport {
 
     private String ticket;
 
+    private String zones;
+
     public String getTicket() {
         return ticket;
+    }
+
+    public String getZones() {
+        return zones;
+    }
+
+    public void setZones(String zones) {
+        this.zones = zones;
     }
 
     public void setPasswordSalt(String passwordSalt) {
@@ -36,11 +46,11 @@ public class UserPassport {
         this.ticket = ticket;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,7 +65,7 @@ public class UserPassport {
      * @param salt
      * @param ticket
      */
-    public UserPassport(long id, String username, String passwordSalt, String salt, String ticket) {
+    public UserPassport(int id, String username, String passwordSalt, String salt, String ticket) {
         super();
         this.id = id;
         this.username = username;

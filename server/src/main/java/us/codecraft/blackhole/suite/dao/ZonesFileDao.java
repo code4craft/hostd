@@ -13,7 +13,7 @@ import java.util.List;
  * Date: 13-5-13
  * Time: 下午9:44
  */
-public interface ZonesFileDao {
+public interface ZonesFileDAO {
 
     @Select("SELECT * FROM ZonesFile where type=1")
     public List<ZonesFile> findPublic();

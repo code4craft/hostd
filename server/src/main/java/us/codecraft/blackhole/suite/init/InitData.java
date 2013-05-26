@@ -2,7 +2,7 @@ package us.codecraft.blackhole.suite.init;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import us.codecraft.blackhole.suite.dao.ZonesFileDao;
+import us.codecraft.blackhole.suite.dao.ZonesFileDAO;
 import us.codecraft.blackhole.suite.exception.RegisterException;
 import us.codecraft.blackhole.suite.model.ZonesFile;
 import us.codecraft.blackhole.suite.service.UserPassportSerivce;
@@ -26,7 +26,8 @@ public class InitData {
                 "  `username` text UNIQUE,\n" +
                 "  `passwordSalt` string,\n" +
                 "  `salt` string,\n" +
-                "  `ticket` text UNIQUE\n" +
+                "  `ticket` text UNIQUE,\n" +
+                "  `zones` string default \"\"\n" +
                 ");");
         sqliteDao.excute("CREATE TABLE ZonesFile (\n" +
                 "  `id` INTEGER primary key AUTOINCREMENT,\n" +
@@ -40,8 +41,8 @@ public class InitData {
             userPassportSerivce.addUserPassport("admin","admin123");
         } catch (RegisterException e) {
         }
-        ZonesFileDao zonesFileDao = applicationContext.getBean(ZonesFileDao.class);
-        zonesFileDao.add(new ZonesFile().setName("sample").setText("127.0.0.1 localhost\n" +
+        ZonesFileDAO zonesFileDAO = applicationContext.getBean(ZonesFileDAO.class);
+        zonesFileDAO.add(new ZonesFile().setName("sample").setText("127.0.0.1 localhost\n" +
                 "69.171.229.25 *.facebook.com").setType(1).setUser("admin"));
     }
 }

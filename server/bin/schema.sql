@@ -11,5 +11,6 @@ CREATE TABLE User_Passport (
   `username` text UNIQUE,
   `passwordSalt` string,
   `salt` string,
-  `ticket` text UNIQUE
+  `ticket` text UNIQUE,
+  `zones` string default ""
 );

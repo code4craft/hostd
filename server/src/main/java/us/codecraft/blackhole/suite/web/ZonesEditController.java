@@ -5,16 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-import us.codecraft.blackhole.suite.dao.ZonesFileDao;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+import us.codecraft.blackhole.suite.dao.ZonesFileDAO;
 import us.codecraft.blackhole.suite.model.JsonResult;
 import us.codecraft.blackhole.suite.model.UserPassport;
 import us.codecraft.blackhole.suite.model.ZonesFile;
-import us.codecraft.blackhole.suite.service.UserPassportSerivce;
+import us.codecraft.blackhole.suite.service.UserZonesService;
+import us.codecraft.blackhole.suite.util.CookieUtils;
 import us.codecraft.blackhole.suite.util.RequestThreadUtils;
 
 import javax.annotation.Resource;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * User: cairne
@@ -26,7 +32,10 @@ import java.util.Map;
 public class ZonesEditController extends MultiActionController {
 
     @Resource
-    private ZonesFileDao zonesFileDao;
+    private ZonesFileDAO zonesFileDAO;
+
+    @Autowired
+    private UserZonesService userZonesService;
 
     @ResponseBody
     @RequestMapping("delete/{id}")
@@ -35,7 +44,7 @@ public class ZonesEditController extends MultiActionController {
         if (userPassport == null) {
             return JsonResult.result(403, "请先登录！");
         }
-        zonesFileDao.deleteById(id);
+        zonesFileDAO.deleteById(id);
         return JsonResult.success("删除成功！");
     }
 
@@ -56,7 +65,7 @@ public class ZonesEditController extends MultiActionController {
     @RequestMapping("{id}")
     public ModelAndView edit(@PathVariable(value = "id") int id) {
         ModelAndView modelAndView = new ModelAndView("edit");
-        ZonesFile zonesFile = zonesFileDao.load(id);
+        ZonesFile zonesFile = zonesFileDAO.load(id);
         if (zonesFile != null) {
             modelAndView.addObject("id", id);
             modelAndView.addObject("name", zonesFile.getName());
@@ -64,6 +73,29 @@ public class ZonesEditController extends MultiActionController {
             modelAndView.addObject("user", zonesFile.getUser());
         }
         return modelAndView;
+    }
+
+    @RequestMapping("")
+    public ModelAndView editDefault(HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("edit");
+        UserPassport userPassport = RequestThreadUtils.getUserPassport();
+        String zones = userZonesService.getZones(userPassport);
+        if (zones == null) {
+            zones = CookieUtils.getZones(request);
+        }
+        modelAndView.addObject("id", 0);
+        modelAndView.addObject("content", zones);
+        modelAndView.addObject("type", "userZones");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public Object saveDefault(HttpServletResponse response, @RequestParam("text") String text) throws UnsupportedEncodingException {
+        UserPassport userPassport = RequestThreadUtils.getUserPassport();
+        userZonesService.updateZones(userPassport, text);
+        CookieUtils.saveZones(response,text);
+        return JsonResult.success("修改成功!");
     }
 
     @ResponseBody
@@ -77,14 +109,14 @@ public class ZonesEditController extends MultiActionController {
         if (id == 0) {
             ZonesFile zonesFile = new ZonesFile();
             zonesFile.setText(text).setUser(userPassport.getUsername()).setName(name).setType(type);
-            int add = zonesFileDao.add(zonesFile);
+            int add = zonesFileDAO.add(zonesFile);
             if (add > 0) {
                 return JsonResult.success("新增成功！");
             }
         } else {
             ZonesFile zonesFile = new ZonesFile();
             zonesFile.setText(text).setName(name).setType(type).setId(id);
-            int update = zonesFileDao.update(zonesFile);
+            int update = zonesFileDAO.update(zonesFile);
             if (update > 0) {
                 return JsonResult.success("修改成功！");
             }

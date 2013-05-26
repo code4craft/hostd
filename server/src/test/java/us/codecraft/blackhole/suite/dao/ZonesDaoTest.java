@@ -18,12 +18,12 @@ import javax.annotation.Resource;
 public class ZonesDaoTest {
 
     @Resource
-    private ZonesFileDao zonesFileDao;
+    private ZonesFileDAO zonesFileDAO;
 
     @Ignore
     @Test
     public void test(){
-        System.out.println(zonesFileDao.findPublic());
-        System.out.println(zonesFileDao.load(1));
+        System.out.println(zonesFileDAO.findPublic());
+        System.out.println(zonesFileDAO.load(1));
     }
 }

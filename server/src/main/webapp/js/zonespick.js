@@ -6,26 +6,32 @@
  * To change this template use File | Settings | File Templates.
  */
 $(function () {
-    bindSlideDown();
+    bindSlideUp($("a#fold-button"));
 });
 
-function bindSlideDown() {
-    $("a#link").bind("click", function () {
-        $("#hiden").slideDown("fast");
-        $("i#link-icon").removeClass("icon-double-angle-down");
-        $("i#link-icon").addClass("icon-double-angle-up")
-        $("a#link").unbind("click");
-        bindSlideUp();
+function bindSlideDown(e) {
+    e.bind("click", function () {
+        var ul = $(this).parent().parent();
+        var foldUl = ul.children("#configs").children("ul");
+        foldUl.slideDown("fast");
+        var i = $(this).children("i#fold-icon");
+        i.removeClass("icon-double-angle-down");
+        i.addClass("icon-double-angle-up")
+        $(this).unbind("click");
+        bindSlideUp($(this));
 
     });
 }
 
-function bindSlideUp() {
-    $("a#link").bind("click", function () {
-        $("#hiden").slideUp("fast");
-        $("i#link-icon").removeClass("icon-double-angle-up");
-        $("i#link-icon").addClass("icon-double-angle-down")
-        $("a#link").unbind("click");
-        bindSlideDown();
+function bindSlideUp(e) {
+    e.bind("click", function () {
+        var ul = $(this).parent().parent();
+        var foldUl = ul.children("#configs").children("ul");
+        foldUl.slideUp("fast");
+        var i = $(this).children("i#fold-icon");
+        i.removeClass("icon-double-angle-up");
+        i.addClass("icon-double-angle-down")
+        $(this).unbind("click");
+        bindSlideDown($(this));
     });
 }

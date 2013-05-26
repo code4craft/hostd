@@ -1,7 +1,7 @@
 package us.codecraft.blackhole.suite.service.impl;
 
 import org.springframework.stereotype.Service;
-import us.codecraft.blackhole.suite.dao.ZonesFileDao;
+import us.codecraft.blackhole.suite.dao.ZonesFileDAO;
 import us.codecraft.blackhole.suite.model.UserPassport;
 import us.codecraft.blackhole.suite.model.ZonesFile;
 import us.codecraft.blackhole.suite.service.ZonesFileService;
@@ -21,15 +21,15 @@ import java.util.Map;
 public class ZonesFileServiceImpl implements ZonesFileService{
 
     @Resource
-    private ZonesFileDao zonesFileDao;
+    private ZonesFileDAO zonesFileDAO;
 
     @Override
     public Map<String, List<ZonesFile>> getZonesFileList(UserPassport userPassport) {
         Map<String, List<ZonesFile>> result = new LinkedHashMap<String, List<ZonesFile>>();
-        List<ZonesFile> zonesFiles = zonesFileDao.findPublic();
+        List<ZonesFile> zonesFiles = zonesFileDAO.findPublic();
         result.put("public", zonesFiles);
         if (userPassport != null) {
-            List<ZonesFile> byUser = zonesFileDao.findByUser(userPassport.getUsername());
+            List<ZonesFile> byUser = zonesFileDAO.findByUser(userPassport.getUsername());
             result.put("personal", byUser);
         } else {
             result.put("personal", Collections.<ZonesFile>emptyList());

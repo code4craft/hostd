@@ -1,21 +1,18 @@
 package us.codecraft.blackhole.suite.web;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import us.codecraft.blackhole.suite.model.UserPassport;
-import us.codecraft.blackhole.suite.model.ZonesFile;
-import us.codecraft.blackhole.suite.service.ZonesFileService;
+import us.codecraft.blackhole.suite.service.UserZonesService;
+import us.codecraft.blackhole.suite.util.CookieUtils;
 import us.codecraft.blackhole.suite.util.RequestThreadUtils;
+import us.codecraft.blackhole.suite.util.UserZonesCodec;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * User: cairne
@@ -26,30 +23,19 @@ import java.util.Map;
 @RequestMapping("zonespick")
 public class ZonesPickController extends MultiActionController {
 
-
     @Autowired
-    private ZonesFileService zonesFileService;
+    private UserZonesService userZonesService;
 
     @RequestMapping("")
     public ModelAndView dashboard(HttpServletRequest request) throws IOException {
-        ModelAndView modelAndView = new ModelAndView("zonespick");
         UserPassport userPassport = RequestThreadUtils.getUserPassport();
-        Map<String, List<ZonesFile>> zonesFileList = zonesFileService.getZonesFileList(userPassport);
-        modelAndView.addAllObjects(zonesFileList);
-
-        constructJsonData(modelAndView, zonesFileList);
+        String zones = userZonesService.getZones(userPassport);
+        if (zones == null) {
+            zones = CookieUtils.getZones(request);
+        }
+        ModelAndView modelAndView = new ModelAndView("zonespick");
+        modelAndView.addObject("zones", UserZonesCodec.toJson(zones));
         return modelAndView;
     }
 
-    private void constructJsonData(ModelAndView modelAndView, Map<String, List<ZonesFile>> zonesFileList) throws IOException {
-        Map<Integer, ZonesFile> dataMap = new LinkedHashMap<Integer, ZonesFile>();
-        for (List<ZonesFile> zonesFiles : zonesFileList.values()) {
-            for (ZonesFile zonesFile : zonesFiles) {
-                dataMap.put(zonesFile.getId(), zonesFile);
-            }
-        }
-        ObjectMapper objectMapper = new ObjectMapper();
-        String data = objectMapper.writeValueAsString(dataMap);
-        modelAndView.addObject("data", data);
-    }
 }

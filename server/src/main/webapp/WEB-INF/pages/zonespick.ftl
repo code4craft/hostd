@@ -27,52 +27,44 @@
         <div class="span10 offset1">
             <h1>hosts</h1>
             <% if (zones.length>0)
-                {
-                for (var i=0;i<zones.length;i++)
-                    {
-                       var zone=zones[i];
+            {
+            for (var i=0;i<zones.length;i++)
+            {
+            var zone=zones[i];
             %>
-            <ul>
+            <ul data-index="<%=i%>">
                 <li class="ui-btn-up-b ui-btn-inner"><a class="ui-link-inherit"
-                                                        href="javascript:void(0)" id="link"><%=zone.domain%>&nbsp;<i
-                        id="link-icon" class="icon-double-angle-down"></i></a><span
+                                                        href="javascript:void(0)" id="fold-button"><%=zone.domain%>&nbsp;<i
+                        id="fold-icon" class="icon-double-angle-up"></i></a><span
                         style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">新建<i
                         class="icon-plus"></i></a></span></li>
-                <li>
-                    <ul id="hiden" style="display: none">
+                <li id="configs">
+                    <ul class="folded">
                         <% if (zone.config.length>0)
-                             {
-                                for (int j=0;j<zone.config.length;j++)
-                                {
-                                  var config = zone.config[j];
-                                %>
-                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href=""><i
-                                style="color: #46a546"
-                                class="icon-ok"></i>&nbsp;config.ip</a>
+                        {
+                        for (var j=0;j<zone.config.length;j++)
+                        {
+                        var config = zone.config[j];
+                        %>
+                        <li class="ui-btn-up-a ui-btn-inner">
+                            <a class="ui-link-inherit" href="">
+                                <% if (config.active) {%><i
+                                    style="color: #46a546"
+                                    class="icon-ok"></i><%}
+                                else {
+                                %>&nbsp;&nbsp;&nbsp;&nbsp;<%}%>&nbsp;<%=config.ip%></a>
                             <span
                                     style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">编辑<i
                                     class="icon-edit"></i></a></span>
                         </li>
-                        <%      }
-                             }%>
-                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>
-                            <span
-                                    style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">编辑<i
-                                    class="icon-edit"></i></a></span>
-                        </li>
-                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>
-                        </li>
-                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>
-                        </li>
+                        <% }
+                        }%>
                     </ul>
                 </li>
             </ul>
             <%
-                    }
-                }%>
+            }
+            }%>
 
         </div>
     </script>
