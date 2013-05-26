@@ -46,8 +46,8 @@
                         {
                         var config = zone.config[j];
                         %>
-                        <li class="ui-btn-up-a ui-btn-inner">
-                            <a class="ui-link-inherit" href="">
+                        <li class="ui-btn-up-a ui-btn-inner" data="<%=config.ip%>" domain-index="<%=i%>" config-index="<%=j%>">
+                            <a class="ui-link-inherit" id="active-button" href="javascript:void(0)">
                                 <% if (config.active) {%><i
                                     style="color: #46a546"
                                     class="icon-ok"></i><%}
@@ -70,12 +70,15 @@
     </script>
     <div id="container"></div>
     <script type="text/javascript">
-        var data = {
-            zones: BHzones
+        function render(){
+            var data = {
+                zones: BHzones
+            }
+            var bt = baidu.template;
+            var html = bt("zones-template", data);
+            document.getElementById('container').innerHTML = html;
         }
-        var bt = baidu.template;
-        var html = bt("zones-template", data);
-        document.getElementById('container').innerHTML = html;
+        render()
     </script>
 
 <#--<div class="span10 offset1">-->
