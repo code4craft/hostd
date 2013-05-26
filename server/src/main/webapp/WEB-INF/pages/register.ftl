@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/css/codemirror.css">
     <link rel="stylesheet" href="/css/solarized.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/codemirror.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/css/font-awesome.css">

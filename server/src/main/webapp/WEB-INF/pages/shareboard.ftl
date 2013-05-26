@@ -8,13 +8,13 @@
     <script src="/js/codemirror.js"></script>
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/javascript.js"></script>
-    <script src="/js/dashboard.js"></script>
+    <script src="/js/shareboard.js"></script>
     <script src="/js/common-action.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="stylesheet" href="/css/codemirror.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/shareboard.css">
     <link rel="stylesheet" href="/css/solarized.css">
     <script>
         BHzones=${data};

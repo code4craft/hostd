@@ -20,7 +20,7 @@ import java.io.IOException;
  * Time: 下午7:40
  */
 @Controller
-@RequestMapping("zonespick")
+@RequestMapping("")
 public class ZonesPickController extends MultiActionController {
 
     @Autowired

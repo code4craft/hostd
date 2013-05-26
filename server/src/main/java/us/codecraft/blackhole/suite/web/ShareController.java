@@ -23,8 +23,8 @@ import java.util.Map;
  * Time: 下午7:40
  */
 @Controller
-@RequestMapping("")
-public class DashboardController extends MultiActionController {
+@RequestMapping("share")
+public class ShareController extends MultiActionController {
 
 
     @Autowired
@@ -32,7 +32,7 @@ public class DashboardController extends MultiActionController {
 
     @RequestMapping("")
     public ModelAndView dashboard(HttpServletRequest request) throws IOException {
-        ModelAndView modelAndView = new ModelAndView("dashboard");
+        ModelAndView modelAndView = new ModelAndView("shareboard");
         UserPassport userPassport = RequestThreadUtils.getUserPassport();
         Map<String, List<ZonesFile>> zonesFileList = zonesFileService.getZonesFileList(userPassport);
         modelAndView.addAllObjects(zonesFileList);
