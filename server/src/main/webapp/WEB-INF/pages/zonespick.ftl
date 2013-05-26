@@ -26,13 +26,25 @@
         <div data-role="content" data-theme="a">
             <h1>hosts</h1>
             <ul>
-                <li class="ui-btn-up-a ui-btn-inner"><a href="javascript:void(0)" id="link">www.dianping.com&nbsp;<i id="link-icon" class="icon-double-angle-down"></i></a></li>
+                <li class="ui-btn-up-b ui-btn-inner"><a class="ui-link-inherit"
+                                                                            href="javascript:void(0)" id="link">WWW.DIANPING.COM&nbsp;<i
+                        id="link-icon" class="icon-double-angle-down"></i></a><span
+                        style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">新建<i
+                        class="icon-plus"></i></a></span></li>
                 <li>
                     <ul id="hiden" style="display: none">
-                        <li data-icon="refresh" class="ui-btn-up-a ui-btn-inner"><a href=""><i style="color: #46a546" class="icon-ok"></i>&nbsp;192.168.9.101</a></li>
-                        <li data-icon="refresh" class="ui-btn-up-a ui-btn-inner"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a></li>
-                        <li data-icon="refresh" class="ui-btn-up-a ui-btn-inner"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a></li>
-                        <li data-icon="refresh" class="ui-btn-up-a ui-btn-inner"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a></li>
+                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href=""><i style="color: #46a546"
+                                                                                               class="icon-ok"></i>&nbsp;192.168.9.101</a>
+                        </li>
+                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>
+                            <span
+                                    style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">编辑<i
+                                    class="icon-edit"></i></a></span>
+                        </li>
+                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>
+                        </li>
+                        <li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

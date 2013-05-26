@@ -11,8 +11,15 @@ function bindLogin() {
     });
 }
 
+function bindRegister() {
+    $("#register-button").bind("click", function () {
+        window.location.href="/register";
+    });
+}
+
 $(function () {
     bindLogin();
+    bindRegister();
 });
 
 function login(username, password) {
