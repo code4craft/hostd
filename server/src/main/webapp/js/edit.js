@@ -18,6 +18,14 @@ function bindEdit() {
     });
 }
 
+function bindSaveDefault() {
+    console.log($("a#save-default"))
+    $("a#save-default").bind("click", function () {
+        alert('a')
+        save('')
+    });
+}
+
 function bindDel() {
     $("a#del").bind("click", function () {
         del($(this).attr("file-id"));
@@ -30,6 +38,8 @@ $(function () {
         mode: "javascript",
         theme: "solarized"
     });
+    console.log('aaa')
+    bindSaveDefault();
     bindApply();
     bindEdit();
     bindDel();

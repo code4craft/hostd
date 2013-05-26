@@ -26,17 +26,24 @@
         <#include "nav.ftl">
     </div>
     <div class="span12">
-        <p style="font-size:30px;">&nbsp;<a href="/">&lt;&lt;</a>&nbsp;配置-<input type="text" id="zones-name"
-                                                                                 value="${name}"/></p>
-        <br/>
+        <input type="hidden" id="zones-name" value="${name?if_exists}"/>
+    <#--<br/>-->
 
-        <div class="cm-s-solarized CodeMirror">
-            <textArea id="code" file-id="${id}">${content}</textArea>
+        <div class="cm-s-solarized CodeMirror span10">
+            <textArea id="code" file-id="${id?if_exists}">${content?if_exists}</textArea>
         </div>
-    <p style="font-size:20px;margin-left: 10%"><a id="apply-a" file-id="${id}" href="javascript:void(0)">应用</a>
-    <#if userPassport?exists && user==userPassport.username>   &nbsp;&nbsp;&nbsp;<a id="save" file-id="#{id}"
-                                                                                    href="javascript:void(0)">保存</a>
-        <#if id gt 0>&nbsp;&nbsp;&nbsp;<a id="del" file-id="#{id}" href="javascript:void(0)">删除</a></#if></p>
+    </div>
+    <div class="span12"></div>
+    <div class="span12">
+    <#if type?exists && type=="userZones">
+        <a id="save-default" class="btn offset1" href="javascript:void(0)">保存</a>
+    <#else>
+        <a id="apply-a" file-id="${id?if_exists}" class="btn offset1" href="javascript:void(0)">应用</a>
+        <#if userPassport?exists && user==userPassport.username>
+            <a id="save" file-id="#{id?if_exists}" class="btn offset1" href="javascript:void(0)">保存</a>
+            <#if id gt 0><a id="del" file-id="#{id?if_exists}" class="btn offset1"
+                            href="javascript:void(0)">删除</a></#if>
+        </#if>
     </#if>
     </div>
 </div>
