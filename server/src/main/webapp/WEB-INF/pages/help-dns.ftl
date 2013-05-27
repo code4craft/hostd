@@ -21,11 +21,10 @@
         <#include "nav.ftl">
     </div>
     <div class="span12">
-        <p class="lead">Windows XP/7</p>
-        <p class="lead">Mac OS X</p>
-        <p class="lead">Android</p>
-        <p class="lead">iPhone</p>
-        <p class="lead">iPad</p>
+        <p class="lead"><a href="http://windows.microsoft.com/zh-CN/windows7/Change-TCP-IP-settings">Windows XP/7</a></p>
+        <p class="lead"><a href="http://www.52cydia.com/webblog/202.html">Mac OS X</a></p>
+        <p class="lead"><a href="http://104zz.iteye.com/blog/1682131">Android</a></p>
+        <p class="lead"><a href="http://www.52cydia.com/webblog/202.html">iPhone/iPad</a></p>
     </div>
 
 </div>

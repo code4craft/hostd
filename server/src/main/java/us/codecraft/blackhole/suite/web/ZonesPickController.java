@@ -10,13 +10,13 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import us.codecraft.blackhole.suite.model.UserPassport;
 import us.codecraft.blackhole.suite.service.UserZonesService;
 import us.codecraft.blackhole.suite.util.CookieUtils;
+import us.codecraft.blackhole.suite.util.IPUtils;
 import us.codecraft.blackhole.suite.util.RequestThreadUtils;
 import us.codecraft.blackhole.suite.util.UserZonesCodec;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.InetAddress;
 
 /**
  * User: cairne
@@ -40,7 +40,7 @@ public class ZonesPickController extends MultiActionController {
         if (zones == null) {
             zones = CookieUtils.getZones(request);
         }
-        String localIp = InetAddress.getLocalHost().getHostAddress().toString();
+        String localIp = IPUtils.getLocalIP();
         ModelAndView modelAndView = new ModelAndView("zonespick");
         modelAndView.addObject("zones", UserZonesCodec.toJson(zones));
         modelAndView.addObject("localIp", localIp);

@@ -1,6 +1,7 @@
 package us.codecraft.blackhole.suite.utils;
 
 import org.junit.Test;
+import us.codecraft.blackhole.suite.util.IPUtils;
 import us.codecraft.blackhole.suite.util.UserZonesCodec;
 
 import java.io.IOException;
@@ -65,6 +66,14 @@ public class UserZonesCodecTest {
         System.out.println(s);
         String s1 = UserZonesCodec.fromJson(s);
         System.out.println(s1);
+    }
+
+    @Test
+    public void testIp(){
+        String localIP = IPUtils.getLocalIP();
+        System.out.println("local"+localIP);
+        String firstNoLoopbackIP4Address = IPUtils.getFirstNoLoopbackIP4Address();
+        System.out.println("first"+firstNoLoopbackIP4Address);
     }
 
 }
