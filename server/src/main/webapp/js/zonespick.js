@@ -8,6 +8,7 @@
 $(function () {
     bindSlideUp($("a#fold-button"));
     bindAcitve();
+    $('#myModal').modal('show');
 });
 
 function bindSlideDown(e) {

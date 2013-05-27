@@ -8,6 +8,7 @@
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/javascript.js"></script>
     <script src="/js/edit.js"></script>
+    <script src="/js/bootstrap.js"></script>
     <script src="/js/common-action.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/codemirror.css">
@@ -29,11 +30,37 @@
         <input type="hidden" id="zones-name" value="${name?if_exists}"/>
     <#--<br/>-->
 
-        <div class="cm-s-solarized CodeMirror span10">
+        <div class="cm-s-solarized CodeMirror">
             <textArea id="code" file-id="${id?if_exists}">${content?if_exists}</textArea>
         </div>
     </div>
-    <div class="span12"></div>
+
+    <div class="span11 alert alert-info">
+        <p class="lead">Syntax:</p>
+
+
+        <ul>
+            <li>
+                <p>ip domain</p>
+
+                <p>e.g. 127.0.0.1 www.dianping.com</p>
+
+            </li>
+            <li>
+                <p>"*" stand for any length of charactor</p>
+
+                <p>e.g. 127.0.0.1 *.dianping.com</p>
+
+            </li>
+            <li>
+                <p>"#" for comment</p>
+
+                <p>e.g. #127.0.0.1 t.dianping.com</p>
+
+                <p>Commented line is a candidate for choice.</p>
+            </li>
+        </ul>
+    </div>
     <div class="span12">
     <#if type?exists && type=="userZones">
         <a id="save-default" class="btn offset1" href="javascript:void(0)">保存</a>

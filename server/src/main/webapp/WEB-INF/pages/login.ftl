@@ -38,8 +38,8 @@
                 <span class="add-on"><i class="icon-lock"></i></span>
                 <input class="span7" id="password" type="password" name="password" placeholder="请输入密码">
             </div>
-            <div class="span12 offset1"><input class="btn" id="login-button" type="button" value="登录" name="登录"/>
-                <a class="offset2" href="/register">注册</a>
+            <div class="span12 offset1"><input class="btn btn-primary" id="login-button" type="button" value="登录" name="登录"/>
+                <a class="btn offset2" href="/register">注册</a>
             </div>
         </form>
     </div>

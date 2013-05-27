@@ -12,6 +12,7 @@
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/common-action.js"></script>
     <script src="/js/zonespick.js"></script>
+    <script src="/js/bootstrap.js"></script>
     <script src="/js/baiduTemplate.js"></script>
     <script>
         BHzones =${zones};
@@ -24,6 +25,7 @@
     <#assign tab="hosts">
         <#include "nav.ftl">
     </div>
+
     <script type="text/template" id="zones-template">
         <div class="span10 offset1">
             <div class="alert alert-info">
@@ -91,6 +93,20 @@
         }
         render()
     </script>
+    <div class="modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Add Config</h3>
+        </div>
+        <div class="modal-body">
+            <p><input class="span12" id="username" placeholder="Please input domain" type="text" name="username" value="www.dianping.com"></p>
+            <p><input class="span12" id="username" placeholder="Please input ip" type="text" name="username"></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn">Close</a>
+            <a href="#" class="btn btn-primary">Add</a>
+        </div>
+    </div>
 
 </div>
 </body>
