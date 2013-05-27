@@ -14,7 +14,7 @@ import java.util.Map;
  * Date: 13-5-26
  * Time: 下午4:19
  */
-public class UserZonesCodec {
+public class UserZonesUtils {
 
     public static class DomainConfig {
         private String domain;
@@ -107,6 +107,48 @@ public class UserZonesCodec {
 
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(list);
+    }
+
+    public static String merge(String textA,String textB){
+        if (StringUtils.isBlank(textA)&&StringUtils.isBlank(textB)){
+            return "";
+        }
+        if (StringUtils.isBlank(textA)){
+            return textB;
+        }
+        if (StringUtils.isBlank(textB)){
+            return textA;
+        }
+        String[] linesA = textA.split("\n");
+        String[] linesB = textB.split("\n");
+        Map<String,Boolean> linesMap = new LinkedHashMap<String, Boolean>();
+        for (String line:linesA){
+            boolean isActive = true;
+            line = StringUtils.trim(line);
+            if (StringUtils.startsWith(line, "#")) {
+                isActive = false;
+                line = line.replaceAll("^#+", "");
+            }
+            if (linesMap.get(line)==null||!linesMap.get(line)){
+                linesMap.put(line,isActive);
+            }
+        }
+        for (String line:linesB){
+            boolean isActive = true;
+            line = StringUtils.trim(line);
+            if (StringUtils.startsWith(line, "#")) {
+                isActive = false;
+                line = line.replaceAll("^#+", "");
+            }
+            if (linesMap.get(line)==null||!linesMap.get(line)){
+                linesMap.put(line,isActive);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Boolean> entry : linesMap.entrySet()) {
+            sb.append(entry.getValue()?entry.getKey():"#"+entry.getKey());
+        }
+        return sb.toString();
     }
 
 }

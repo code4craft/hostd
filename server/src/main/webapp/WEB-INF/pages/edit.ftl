@@ -35,6 +35,19 @@
         </div>
     </div>
 
+    <div class="span12">
+    <#if type?exists && type=="userZones">
+        <a id="save-default" class="btn offset1" href="javascript:void(0)">保存</a>
+    <#else>
+        <a id="apply-a" file-id="${id?if_exists}" class="btn offset1" href="javascript:void(0)">应用</a>
+        <#if userPassport?exists && user==userPassport.username>
+            <a id="save" file-id="#{id?if_exists}" class="btn offset1" href="javascript:void(0)">保存</a>
+            <#if id gt 0><a id="del" file-id="#{id?if_exists}" class="btn offset1"
+                            href="javascript:void(0)">删除</a></#if>
+        </#if>
+    </#if>
+    </div>
+    <div class="span12"></div>
     <div class="span11 alert alert-info">
         <p class="lead">Syntax:</p>
 
@@ -60,18 +73,6 @@
                 <p>Commented line is a candidate for choice.</p>
             </li>
         </ul>
-    </div>
-    <div class="span12">
-    <#if type?exists && type=="userZones">
-        <a id="save-default" class="btn offset1" href="javascript:void(0)">保存</a>
-    <#else>
-        <a id="apply-a" file-id="${id?if_exists}" class="btn offset1" href="javascript:void(0)">应用</a>
-        <#if userPassport?exists && user==userPassport.username>
-            <a id="save" file-id="#{id?if_exists}" class="btn offset1" href="javascript:void(0)">保存</a>
-            <#if id gt 0><a id="del" file-id="#{id?if_exists}" class="btn offset1"
-                            href="javascript:void(0)">删除</a></#if>
-        </#if>
-    </#if>
     </div>
 </div>
 </body>

@@ -2,7 +2,7 @@ package us.codecraft.blackhole.suite.utils;
 
 import org.junit.Test;
 import us.codecraft.blackhole.suite.util.IPUtils;
-import us.codecraft.blackhole.suite.util.UserZonesCodec;
+import us.codecraft.blackhole.suite.util.UserZonesUtils;
 
 import java.io.IOException;
 
@@ -62,9 +62,9 @@ public class UserZonesCodecTest {
                 "207.97.227.243 raw.github.com\n" +
                 "204.232.175.78 documentcloud.github.com \n" +
                 "204.232.175.94 gist.github.com\n";
-        String s = UserZonesCodec.toJson(text);
+        String s = UserZonesUtils.toJson(text);
         System.out.println(s);
-        String s1 = UserZonesCodec.fromJson(s);
+        String s1 = UserZonesUtils.fromJson(s);
         System.out.println(s1);
     }
 

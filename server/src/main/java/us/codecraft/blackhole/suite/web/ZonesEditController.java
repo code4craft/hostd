@@ -14,6 +14,7 @@ import us.codecraft.blackhole.suite.model.ZonesFile;
 import us.codecraft.blackhole.suite.service.UserZonesService;
 import us.codecraft.blackhole.suite.util.CookieUtils;
 import us.codecraft.blackhole.suite.util.RequestThreadUtils;
+import us.codecraft.blackhole.suite.util.UserZonesUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -82,6 +83,8 @@ public class ZonesEditController extends MultiActionController {
         String zones = userZonesService.getZones(userPassport);
         if (zones == null) {
             zones = CookieUtils.getZones(request);
+        }    else {
+            zones = UserZonesUtils.merge(zones, CookieUtils.getZones(request));
         }
         modelAndView.addObject("id", 0);
         modelAndView.addObject("content", zones);

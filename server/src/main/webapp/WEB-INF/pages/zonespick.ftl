@@ -27,7 +27,7 @@
     </div>
 
     <script type="text/template" id="zones-template">
-        <div class="span10 offset1">
+        <div class="span10 offset1" id="configs-container">
             <div class="alert alert-info">
                 Config has not effect? Set your DNS server to ${localIp} first. Learn <a href="/help/dns">how to set</a>.
             </div>
@@ -40,10 +40,10 @@
             var zone=zones[i];
             %>
             <ul data-index="<%=i%>">
-                <li class="ui-btn-up-b ui-btn-inner"><a class="ui-link-inherit"
+                <li class="ui-btn-up-b ui-btn-inner" data-domain="<%=zone.domain%>"><a class="ui-link-inherit"
                                                         href="javascript:void(0)" id="fold-button"><%=zone.domain%>&nbsp;<i
                         id="fold-icon" class="icon-double-angle-up"></i></a><span
-                        style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">新建<i
+                        style="float:right;"><a class="ui-link-inherit" id="button-new" href="javascript:void(0)" id="link">Add<i
                         class="icon-plus"></i></a></span></li>
                 <li id="configs">
                     <ul class="folded">
@@ -64,8 +64,8 @@
                                 else {
                                 %>&nbsp;&nbsp;&nbsp;&nbsp;<%}%>&nbsp;<%=config.ip%></a>
                             <span
-                                    style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">编辑<i
-                                    class="icon-edit"></i></a></span>
+                                    style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i
+                                    class="icon-trash"></i></a></span>
                         </li>
                         <% }
                         }%>
@@ -75,11 +75,50 @@
             <%
             }
             } else {%>
-                <p>No config? </p><p>Try <a class="btn" href="/edit"><i class="icon-edit"></i>Edit</a></p><p> or <a class="btn" href="/login"><i class="icon-key"></i>Login</a> to
-                    share config in other device</p>
+            <p>No config? </p>
+
+            <p>Try <a class="btn" href="/edit"><i class="icon-edit"></i>Edit</a></p>
+
+            <p> or <a class="btn" href="/login"><i class="icon-key"></i>Login</a> to
+                share config in other device</p>
             <%}%>
 
         </div>
+    </script>
+    <script type="text/template" id="config-template">
+        <ul data-index="<%=i%>">
+                <li class="ui-btn-up-b ui-btn-inner" data-domain="<%=zone.domain%>"><a class="ui-link-inherit"
+        href="javascript:void(0)" id="fold-button"><%=zone.domain%>&nbsp;<i
+        id="fold-icon" class="icon-double-angle-up"></i></a><span
+        style="float:right;"><a class="ui-link-inherit" id="button-new" href="javascript:void(0)" id="link">Add<i
+        class="icon-plus"></i></a></span></li>
+        <li id="configs">
+                <ul class="folded">
+                <% if (zone.config.length>0)
+        {
+            for (var j=0;j
+                    <zone.config.length
+                    ;j++)
+            {
+                var config = zone.config[j];
+            %>
+            <li class="ui-btn-up-a ui-btn-inner" data="<%=config.ip%>" domain-index="<%=i%>"
+                config-index="<%=j%>">
+                        <a class="ui-link-inherit" id="active-button" href="javascript:void(0)">
+                    <% if (config.active) {%><i
+                style="color: #46a546"
+            class="icon-ok"></i><%}
+            else {
+                %>&nbsp;&nbsp;&nbsp;&nbsp;<%}%>&nbsp;<%=config.ip%></a>
+                        <span
+                style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i
+            class="icon-trash"></i></a></span>
+                        </li>
+                <% }
+            }%>
+        </ul>
+                </li>
+        </ul>
     </script>
     <div id="container"></div>
     <script type="text/javascript">
@@ -93,22 +132,23 @@
         }
         render()
     </script>
-    <div class="modal">
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3>Add Config</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Add Config</h3>
         </div>
         <div class="modal-body">
-            <p><input class="span12" id="username" placeholder="Please input domain" type="text" name="username" value="www.dianping.com"></p>
-            <p><input class="span12" id="username" placeholder="Please input ip" type="text" name="username"></p>
+            <p><input class="span12" id="input-domain" placeholder="Please input domain" type="text" name="domain"></p>
+
+            <p><input class="span12" id="input-ip" placeholder="Please input ip" type="text" name="ip"></p>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn">Close</a>
-            <a href="#" class="btn btn-primary">Add</a>
+            <a href="javascript:void(0)" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+            <a href="javascript:void(0)" id="button-do-add" class="btn btn-primary">Add</a>
         </div>
-    </div>
 
-</div>
+    </div>
 </body>
 
 </html>

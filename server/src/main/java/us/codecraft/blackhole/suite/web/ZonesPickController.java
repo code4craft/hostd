@@ -12,7 +12,7 @@ import us.codecraft.blackhole.suite.service.UserZonesService;
 import us.codecraft.blackhole.suite.util.CookieUtils;
 import us.codecraft.blackhole.suite.util.IPUtils;
 import us.codecraft.blackhole.suite.util.RequestThreadUtils;
-import us.codecraft.blackhole.suite.util.UserZonesCodec;
+import us.codecraft.blackhole.suite.util.UserZonesUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,10 +39,12 @@ public class ZonesPickController extends MultiActionController {
         String zones = userZonesService.getZones(userPassport);
         if (zones == null) {
             zones = CookieUtils.getZones(request);
+        }    else {
+            zones = UserZonesUtils.merge(zones,CookieUtils.getZones(request));
         }
         String localIp = IPUtils.getLocalIP();
         ModelAndView modelAndView = new ModelAndView("zonespick");
-        modelAndView.addObject("zones", UserZonesCodec.toJson(zones));
+        modelAndView.addObject("zones", UserZonesUtils.toJson(zones));
         modelAndView.addObject("localIp", localIp);
         return modelAndView;
     }
@@ -50,7 +52,7 @@ public class ZonesPickController extends MultiActionController {
     @ResponseBody
     @RequestMapping("pick")
     public Object pick(HttpServletRequest request, HttpServletResponse response,@RequestParam("json") String json) throws IOException {
-        String text = UserZonesCodec.fromJson(json);
+        String text = UserZonesUtils.fromJson(json);
         UserPassport userPassport = RequestThreadUtils.getUserPassport();
         userZonesService.updateZones(userPassport, text);
         CookieUtils.saveZones(response, text);
