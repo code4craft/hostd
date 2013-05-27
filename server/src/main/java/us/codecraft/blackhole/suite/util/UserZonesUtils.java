@@ -58,16 +58,14 @@ public class UserZonesUtils {
     public static String fromJson(String json) throws IOException {
         StringBuilder sb = new StringBuilder();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Map<String,Object>> list = (List<Map<String,Object>>) objectMapper.readValue(json, List.class);
+        List<Map<String, Object>> list = (List<Map<String, Object>>) objectMapper.readValue(json, List.class);
         for (Map<String, Object> objectMap : list) {
-            List<Map> config = (List<Map>)objectMap.get("config");
+            List<Map> config = (List<Map>) objectMap.get("config");
             for (Map domainConfig : config) {
                 sb.append(((Boolean) domainConfig.get("active") ? "" : "#") + domainConfig.get("ip") + "\t" + domainConfig.get("domain") + "\n");
             }
         }
-
-
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     public static String toJson(String text) throws IOException {
@@ -97,11 +95,11 @@ public class UserZonesUtils {
                 }
             }
         }
-        List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (Map.Entry<String, List<DomainConfig>> listEntry : map.entrySet()) {
-            Map<String,Object> innerMap = new LinkedHashMap<String, Object>();
-            innerMap.put("domain",listEntry.getKey());
-            innerMap.put("config",listEntry.getValue());
+            Map<String, Object> innerMap = new LinkedHashMap<String, Object>();
+            innerMap.put("domain", listEntry.getKey());
+            innerMap.put("config", listEntry.getValue());
             list.add(innerMap);
         }
 
@@ -109,46 +107,66 @@ public class UserZonesUtils {
         return objectMapper.writeValueAsString(list);
     }
 
-    public static String merge(String textA,String textB){
-        if (StringUtils.isBlank(textA)&&StringUtils.isBlank(textB)){
+    public static String merge(String textA, String textB) {
+        if (StringUtils.isBlank(textA) && StringUtils.isBlank(textB)) {
             return "";
         }
-        if (StringUtils.isBlank(textA)){
+        if (StringUtils.isBlank(textA)) {
             return textB;
         }
-        if (StringUtils.isBlank(textB)){
+        if (StringUtils.isBlank(textB)) {
             return textA;
         }
         String[] linesA = textA.split("\n");
         String[] linesB = textB.split("\n");
-        Map<String,Boolean> linesMap = new LinkedHashMap<String, Boolean>();
-        for (String line:linesA){
-            boolean isActive = true;
-            line = StringUtils.trim(line);
-            if (StringUtils.startsWith(line, "#")) {
-                isActive = false;
-                line = line.replaceAll("^#+", "");
-            }
-            if (linesMap.get(line)==null||!linesMap.get(line)){
-                linesMap.put(line,isActive);
-            }
+        // domain-ip-active
+        DoubleKeyMap<String, String, Boolean> linesMap = new DoubleKeyMap<String, String, Boolean>(new LinkedHashMap<String, Map<String, Boolean>>(), LinkedHashMap.class);
+        for (String line : linesA) {
+            extractLine(linesMap, line);
         }
-        for (String line:linesB){
-            boolean isActive = true;
-            line = StringUtils.trim(line);
-            if (StringUtils.startsWith(line, "#")) {
-                isActive = false;
-                line = line.replaceAll("^#+", "");
-            }
-            if (linesMap.get(line)==null||!linesMap.get(line)){
-                linesMap.put(line,isActive);
-            }
+        for (String line : linesB) {
+            extractLine(linesMap, line);
         }
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Boolean> entry : linesMap.entrySet()) {
-            sb.append(entry.getValue()?entry.getKey():"#"+entry.getKey()+"\n");
+        //only one config can be active for a domain
+        for (Map.Entry<String, Map<String, Boolean>> mapEntry : linesMap.entrySet()) {
+            boolean hasOneActive = false;
+            for (Map.Entry<String, Boolean> entry : mapEntry.getValue().entrySet()) {
+                if (entry.getValue()) {
+                    if (!hasOneActive) {
+                        hasOneActive = true;
+                    } else {
+                        entry.setValue(false);
+                    }
+                }
+            }
         }
-        return sb.toString();
+
+        for (Map.Entry<String, Map<String, Boolean>> mapEntry : linesMap.entrySet()) {
+            for (Map.Entry<String, Boolean> entry : mapEntry.getValue().entrySet()) {
+                sb.append((entry.getValue() ? "" : "#") + mapEntry.getKey()+"\t"+entry.getKey() + "\n");
+            }
+        }
+        return sb.toString().trim();
+    }
+
+    private static void extractLine(DoubleKeyMap<String, String, Boolean> linesMap, String line) {
+        boolean isActive = true;
+        line = StringUtils.trim(line);
+        if (StringUtils.startsWith(line, "#")) {
+            isActive = false;
+            line = line.replaceAll("^#+", "");
+        }
+        String[] tokens = line.split("\\s+");
+        if (tokens.length > 1) {
+            String ip = tokens[0];
+            for (int i = 1; i < tokens.length; i++) {
+                String domain = tokens[i];
+                if (linesMap.get(domain, ip) == null || !linesMap.get(domain, ip)) {
+                    linesMap.put(domain, ip, isActive);
+                }
+            }
+        }
     }
 
 }
