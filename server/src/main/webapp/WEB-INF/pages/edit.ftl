@@ -3,7 +3,7 @@
 <!--rubyblue ambiance solarized-->
 <head>
     <meta charset="utf-8"/>
-    <title>CodeMirror</title>
+    <title>Hostd-edit</title>
     <script src="/js/codemirror.js"></script>
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/javascript.js"></script>

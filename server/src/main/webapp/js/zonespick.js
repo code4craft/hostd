@@ -56,6 +56,7 @@ function bindAcitve() {
         }
         configs[j].active = finalStat;
         changeSelect($(this)[0],finalStat,configs[j].ip);
+        pick(JSON.stringify(BHzones));
     });
 }
 

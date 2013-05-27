@@ -23,6 +23,24 @@ function apply(text) {
         });
 }
 
+function pick(text) {
+    console.log(text)
+    $.ajax({
+            url: "/pick",
+            data: {
+                json: text
+            },
+            method: "post"
+        }
+    ).done(function (data) {
+            if (data["code"] == 200) {
+                alert(data["msg"])
+            } else {
+                alert(data["msg"])
+            }
+        });
+}
+
 function save(id) {
     $.ajax({
             url: "/edit/save/" + id,

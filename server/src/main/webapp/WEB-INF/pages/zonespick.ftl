@@ -4,12 +4,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8"/>
-    <title>SetHosts</title>
+    <title>Hostd</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="stylesheet" href="/css/hostd.css">
     <script src="/js/jquery-1.9.1.js"></script>
+    <script src="/js/common-action.js"></script>
     <script src="/js/zonespick.js"></script>
     <script src="/js/baiduTemplate.js"></script>
     <script>
@@ -25,10 +26,11 @@
     </div>
     <script type="text/template" id="zones-template">
         <div class="span10 offset1">
-            <h1>hosts</h1>
             <% if (zones.length>0)
             {
-            for (var i=0;i<zones.length;i++)
+            for (var i=0;i
+            <zones.length
+            ;i++)
             {
             var zone=zones[i];
             %>
@@ -42,11 +44,14 @@
                     <ul class="folded">
                         <% if (zone.config.length>0)
                         {
-                        for (var j=0;j<zone.config.length;j++)
+                        for (var j=0;j
+                        <zone.config.length
+                        ;j++)
                         {
                         var config = zone.config[j];
                         %>
-                        <li class="ui-btn-up-a ui-btn-inner" data="<%=config.ip%>" domain-index="<%=i%>" config-index="<%=j%>">
+                        <li class="ui-btn-up-a ui-btn-inner" data="<%=config.ip%>" domain-index="<%=i%>"
+                            config-index="<%=j%>">
                             <a class="ui-link-inherit" id="active-button" href="javascript:void(0)">
                                 <% if (config.active) {%><i
                                     style="color: #46a546"
@@ -64,13 +69,16 @@
             </ul>
             <%
             }
-            }%>
+            } else {%>
+                <p>No config? </p><p>Try <a class="btn" href="/edit"><i class="icon-edit"></i>Edit</a></p><p> or <a class="btn" href="/login"><i class="icon-key"></i>Login</a> to
+                    share config in other device</p>
+            <%}%>
 
         </div>
     </script>
     <div id="container"></div>
     <script type="text/javascript">
-        function render(){
+        function render() {
             var data = {
                 zones: BHzones
             }
@@ -81,39 +89,6 @@
         render()
     </script>
 
-<#--<div class="span10 offset1">-->
-<#--<div data-role="content" data-theme="a">-->
-<#--<h1>hosts</h1>-->
-<#--<ul>-->
-<#--<li class="ui-btn-up-b ui-btn-inner"><a class="ui-link-inherit"-->
-<#--href="javascript:void(0)" id="link">WWW.DIANPING.COM&nbsp;<i-->
-<#--id="link-icon" class="icon-double-angle-down"></i></a><span-->
-<#--style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">新建<i-->
-<#--class="icon-plus"></i></a></span></li>-->
-<#--<li>-->
-<#--<ul id="hiden" style="display: none">-->
-<#--<li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href=""><i-->
-<#--style="color: #46a546"-->
-<#--class="icon-ok"></i>&nbsp;192.168.9.101</a>-->
-<#--<span-->
-<#--style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">编辑<i-->
-<#--class="icon-edit"></i></a></span>-->
-<#--</li>-->
-<#--<li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>-->
-<#--<span-->
-<#--style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="link">编辑<i-->
-<#--class="icon-edit"></i></a></span>-->
-<#--</li>-->
-<#--<li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>-->
-<#--</li>-->
-<#--<li class="ui-btn-up-a ui-btn-inner"><a class="ui-link-inherit" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;192.168.9.101</a>-->
-<#--</li>-->
-<#--</ul>-->
-<#--</li>-->
-<#--</ul>-->
-
-<#--</div>-->
-<#--</div>-->
 </div>
 </body>
 
