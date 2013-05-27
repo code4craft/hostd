@@ -16,6 +16,7 @@ import us.codecraft.blackhole.suite.util.UserZonesCodec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  * User: cairne
@@ -39,8 +40,10 @@ public class ZonesPickController extends MultiActionController {
         if (zones == null) {
             zones = CookieUtils.getZones(request);
         }
+        String localIp = InetAddress.getLocalHost().getHostAddress().toString();
         ModelAndView modelAndView = new ModelAndView("zonespick");
         modelAndView.addObject("zones", UserZonesCodec.toJson(zones));
+        modelAndView.addObject("localIp", localIp);
         return modelAndView;
     }
 

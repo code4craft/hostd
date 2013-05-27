@@ -26,6 +26,9 @@
     </div>
     <script type="text/template" id="zones-template">
         <div class="span10 offset1">
+            <div class="alert alert-info">
+                Config has not effect? Set your DNS server to ${localIp} first. Learn <a href="/help/dns">how to set</a>.
+            </div>
             <% if (zones.length>0)
             {
             for (var i=0;i

@@ -66,4 +66,5 @@ public class UserZonesCodecTest {
         String s1 = UserZonesCodec.fromJson(s);
         System.out.println(s1);
     }
+
 }

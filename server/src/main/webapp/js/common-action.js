@@ -34,7 +34,6 @@ function pick(text) {
         }
     ).done(function (data) {
             if (data["code"] == 200) {
-                alert(data["msg"])
             } else {
                 alert(data["msg"])
             }

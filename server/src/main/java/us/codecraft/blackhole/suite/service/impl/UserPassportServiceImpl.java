@@ -59,10 +59,10 @@ public class UserPassportServiceImpl implements UserPassportSerivce {
         }
         String passwordSalt = UserPassportUtil.salt(password, userPassport.getSalt());
         if (passwordSalt.equals(userPassport.getPasswordSalt())) {
-            //登录时重新生成票
-            final String generateTicket = UserPassportUtil.generateTicket(userPassport.getUsername());
-            userPassport.setTicket(generateTicket);
-            userPassportDAO.update(userPassport);
+//            //登录时重新生成票
+//            final String generateTicket = UserPassportUtil.generateTicket(userPassport.getUsername());
+//            userPassport.setTicket(generateTicket);
+//            userPassportDAO.update(userPassport);
             return userPassport;
         } else {
             throw new LoginException(LoginConstant.LOGIN_ERROR_PASSWORD_INCORRECT);
