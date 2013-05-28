@@ -144,7 +144,7 @@ public class UserZonesUtils {
 
         for (Map.Entry<String, Map<String, Boolean>> mapEntry : linesMap.entrySet()) {
             for (Map.Entry<String, Boolean> entry : mapEntry.getValue().entrySet()) {
-                sb.append((entry.getValue() ? "" : "#") + mapEntry.getKey()+"\t"+entry.getKey() + "\n");
+                sb.append((entry.getValue() ? "" : "#") + entry.getKey()+"\t"+mapEntry.getKey() + "\n");
             }
         }
         return sb.toString().trim();

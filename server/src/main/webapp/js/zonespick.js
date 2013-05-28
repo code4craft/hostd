@@ -10,7 +10,38 @@ $(function () {
     bindAcitve($("a#active-button"));
     bindNew($("a#button-new"));
     bindAdd($("a#button-do-add"));
+    bindDelete($("a#delete-button"))
+    bindCandidate();
+
 });
+
+function bindCandidate() {
+    domainCandidate = [];
+    ipCandidate = [];
+    buildCandidate()
+    $('#input-domain').typeahead({
+        source: domainCandidate,
+        items:4
+    })
+    $('#input-ip').typeahead({
+        source: ipCandidate,
+        items:4
+    })
+}
+
+function buildCandidate() {
+    BHzones.forEach(function (e) {
+        var domain = e.domain;
+        if (domainCandidate.indexOf(domain) == -1) {
+            domainCandidate.push(domain)
+        }
+        e.config.forEach(function (config) {
+            if (ipCandidate.indexOf(config.ip)==-1) {
+                ipCandidate.push(config.ip)
+            }
+        })
+    });
+}
 
 function bindSlideDown(e) {
     e.bind("click", function () {
@@ -28,15 +59,18 @@ function bindSlideDown(e) {
 
 function bindDelete(e) {
     e.bind("click", function () {
-        var ul = $(this).parent().parent();
-        var foldUl = ul.children("#configs").children("ul");
-        foldUl.slideDown("fast");
-        var i = $(this).children("i#fold-icon");
-        i.removeClass("icon-double-angle-down");
-        i.addClass("icon-double-angle-up")
-        $(this).unbind("click");
-        bindSlideUp($(this));
+        var li = $(this).parent().parent();
+        var domainIndex = li.attr("domain-index");
+        var configIndex = li.attr("config-index");
+        BHzones[domainIndex].config.pop(configIndex);
+        if (BHzones[domainIndex].config.length == 0) {
 
+            var ul = li.parent().parent().parent();
+            ul.remove()
+        } else {
+            li.remove()
+        }
+        pick(JSON.stringify(BHzones));
     });
 }
 
@@ -68,14 +102,23 @@ function bindAdd(e) {
             };
 
             if (domainIndex < data.length) {
-                var ul = $("ul[data-index=" + domainIndex + "]");
-                var configId = ul.children("li").length;
-                data[i].config.push(config);
-                var newLi = '<li class="ui-btn-up-a ui-btn-inner" data="' + ip + '" domain-index="' + domainIndex + '" config-index="' + configId + '">';
-                newLi += '\n<a class="ui-link-inherit" id="active-button" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip + '</a>';
-                newLi += '<span style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i class="icon-trash"></i></a></span></li>';
-                ul.children("li#configs").children("ul").append(newLi);
-                bindAcitve(ul.find("li[config-index=" + configId + "]").children("a#active-button"))
+                var exist = false;
+                data[i].config.forEach(function (e) {
+                    if (e.ip == ip) {
+                        exist = true;
+                    }
+                })
+                if (!exist) {
+                    var ul = $("ul[data-index=" + domainIndex + "]");
+                    var configId = ul.children("li").length;
+                    data[i].config.push(config);
+                    var newLi = '<li class="ui-btn-up-a ui-btn-inner" data="' + ip + '" domain-index="' + domainIndex + '" config-index="' + configId + '">';
+                    newLi += '\n<a class="ui-link-inherit" id="active-button" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip + '</a>';
+                    newLi += '<span style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i class="icon-trash"></i></a></span></li>';
+                    ul.children("li#configs").children("ul").append(newLi);
+                    bindAcitve(ul.find("li[config-index=" + configId + "]").children("a#active-button"))
+                    bindDelete(ul.find("li[config-index=" + configId + "]").find("a#delete-button"))
+                }
             } else {
                 var zone = {
                     domain: domain,
@@ -89,13 +132,15 @@ function bindAdd(e) {
                 }
                 var html = bt("config-template", data);
                 $("div#configs-container").append(html);
-                var ul = $("ul[data-index="+domainIndex+"]");
+                var ul = $("ul[data-index=" + domainIndex + "]");
                 bindSlideUp(ul.find("a#fold-button"));
                 bindAcitve(ul.find("a#active-button"));
                 bindNew(ul.find("a#button-new"));
                 bindAdd(ul.find("a#button-do-add"));
+                bindDelete(ul.find("a#delete-button"))
             }
             $('#myModal').modal("hide");
+            buildCandidate()
             pick(JSON.stringify(BHzones));
         }
     )

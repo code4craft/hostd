@@ -127,10 +127,10 @@ public class UserZonesUtilsTest {
                 "192.168.9.101 www.diandian.com";
         String textB = "127.0.0.1 www.dianping.com www.diandian.com";
         String merge = UserZonesUtils.merge(textA, textB);
-        Assert.assertEquals("www.dianping.com\t192.168.9.101\n" +
-                "#www.dianping.com\t192.168.9.102\n" +
-                "#www.dianping.com\t127.0.0.1\n" +
-                "www.diandian.com\t192.168.9.101\n" +
-                "#www.diandian.com\t127.0.0.1",merge);
+        Assert.assertEquals("192.168.9.101\twww.dianping.com\n" +
+                "#192.168.9.102\twww.dianping.com\n" +
+                "#127.0.0.1\twww.dianping.com\n" +
+                "192.168.9.101\twww.diandian.com\n" +
+                "#127.0.0.1\twww.diandian.com",merge);
     }
 }

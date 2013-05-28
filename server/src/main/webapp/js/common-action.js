@@ -24,7 +24,6 @@ function apply(text) {
 }
 
 function pick(text) {
-    console.log(text)
     $.ajax({
             url: "/pick",
             data: {

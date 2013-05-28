@@ -38,6 +38,9 @@ public class ZonesEditController extends MultiActionController {
     @Autowired
     private UserZonesService userZonesService;
 
+    @Autowired
+    private ZonesApplyController zonesApplyController;
+
     @ResponseBody
     @RequestMapping("delete/{id}")
     public Object delete(@PathVariable("id") int id) {
@@ -83,8 +86,6 @@ public class ZonesEditController extends MultiActionController {
         String zones = userZonesService.getZones(userPassport);
         if (zones == null) {
             zones = CookieUtils.getZones(request);
-        }    else {
-            zones = UserZonesUtils.merge(zones, CookieUtils.getZones(request));
         }
         modelAndView.addObject("id", 0);
         modelAndView.addObject("content", zones);
@@ -94,11 +95,11 @@ public class ZonesEditController extends MultiActionController {
 
     @ResponseBody
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public Object saveDefault(HttpServletResponse response, @RequestParam("text") String text) throws UnsupportedEncodingException {
+    public Object saveDefault(HttpServletRequest request,HttpServletResponse response, @RequestParam("text") String text) throws UnsupportedEncodingException {
         UserPassport userPassport = RequestThreadUtils.getUserPassport();
         userZonesService.updateZones(userPassport, text);
         CookieUtils.saveZones(response,text);
-        return JsonResult.success("修改成功!");
+        return zonesApplyController.save(text, request);
     }
 
     @ResponseBody

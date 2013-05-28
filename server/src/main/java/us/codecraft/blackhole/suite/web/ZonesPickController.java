@@ -39,8 +39,6 @@ public class ZonesPickController extends MultiActionController {
         String zones = userZonesService.getZones(userPassport);
         if (zones == null) {
             zones = CookieUtils.getZones(request);
-        }    else {
-            zones = UserZonesUtils.merge(zones,CookieUtils.getZones(request));
         }
         String localIp = IPUtils.getLocalIP();
         ModelAndView modelAndView = new ModelAndView("zonespick");
