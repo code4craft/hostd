@@ -34,9 +34,9 @@ public class ZonesApplyController extends MultiActionController {
     public Object save(@RequestParam("text") String text, HttpServletRequest request) {
         zonesFileApplyer.apply(IPUtils.getClientIp(request), text);
         if (blackholeConnector.isConnected()) {
-            return JsonResult.success("应用成功！");
+            return JsonResult.success("Aplly success!");
         } else {
-            return JsonResult.error("应用失败，Blackhole未启动！");
+            return JsonResult.error("Aplly failed，Blackhole is not connected！");
         }
     }
 }

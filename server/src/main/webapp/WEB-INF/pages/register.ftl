@@ -30,18 +30,18 @@
             </div>
             <div class="input-prepend span12">
                 <span class="add-on"><i class="icon-user"></i></span>
-                <input class="span7" id="username" placeholder="请输入用户名" type="text" name="username">
+                <input class="span7" id="username" placeholder="Please input username" type="text" name="username">
             </div>
             <div class="input-prepend span12">
                 <span class="add-on"><i class="icon-lock"></i></span>
-                <input class="span7" id="password" type="password" name="password" placeholder="请输入密码">
+                <input class="span7" id="password" type="password" name="password" placeholder="Please input password">
             </div>
             <div class="input-prepend span12">
                 <span class="add-on"><i class="icon-key"></i></span>
-                <input class="span7" id="repassword" type="password" name="password" placeholder="请重复密码">
+                <input class="span7" id="repassword" type="password" name="password" placeholder="Confirm your password">
             </div>
             <div class="span12 offset2">
-                <input class="btn offset1" id="register-button" type="button" value="注册" name="注册"/>
+                <input class="btn offset1" id="register-button" type="button" value="Sign Up" name="Sign Up"/>
             </div>
         </form>
     </div>

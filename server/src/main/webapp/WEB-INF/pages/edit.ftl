@@ -26,7 +26,7 @@
     <#assign tab="edit">
         <#include "nav.ftl">
     </div>
-    <div class="span12">
+    <div class="span12" id="code-container">
         <input type="hidden" id="zones-name" value="${name?if_exists}"/>
     <#--<br/>-->
 
@@ -37,7 +37,7 @@
 
     <div class="span12">
     <#if type?exists && type=="userZones">
-        <a id="save-default" class="btn offset1" href="javascript:void(0)">保存</a>
+        <a id="save-default" class="btn offset1" href="javascript:void(0)"><i class="icon-save"></i>Save</a>
     <#else>
         <a id="apply-a" file-id="${id?if_exists}" class="btn offset1" href="javascript:void(0)">应用</a>
         <#if userPassport?exists && user==userPassport.username>

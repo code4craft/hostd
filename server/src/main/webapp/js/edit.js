@@ -28,7 +28,7 @@ function bindSaveDefault() {
 function bindDel() {
     $("a#del").bind("click", function () {
         del($(this).attr("file-id"));
-        setTimeout("window.location.href=\"/\"",1000);
+        setTimeout("window.location.href=\"/\"", 1000);
     });
 }
 
@@ -41,4 +41,7 @@ $(function () {
     bindApply();
     bindEdit();
     bindDel();
+    $("#code-containe").bind("keypress", function (e) {
+        console.log($(e));
+    })
 });

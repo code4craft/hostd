@@ -28,8 +28,13 @@
 
     <script type="text/template" id="zones-template">
         <div class="span10 offset1" id="configs-container">
-            <div class="alert alert-info">
+            <div class="alert alert-info" style="height:30px">
+                <span>
                 Config has not effect? Set your DNS server to ${localIp} first. Learn <a href="/help/dns">how to set</a>.
+                </span>
+
+                <span class="pull-right"><a class="btn btn-primary" href="javascript:void(0)" id="button-new"><i
+                        class="icon-file"></i>New Domain</a></span>
             </div>
             <% if (zones.length>0)
             {
@@ -77,12 +82,17 @@
             <%
             }
             } else {%>
-            <p>No config? </p>
+            <div id="empty-tip">
+                <p class="lead">No config? </p>
 
-            <p>Try <a class="btn" href="/edit"><i class="icon-edit"></i>Edit</a></p>
+                <p class="lead"><a class="btn btn-primary" href="javascript:void(0)" id="button-new"><i
+                        class="icon-file"></i>Add</a> your first config</p>
 
-            <p> or <a class="btn" href="/login"><i class="icon-key"></i>Login</a> to
-                share config in other device</p>
+                <p class="lead">or Try <a class="btn" href="/edit"><i class="icon-edit"></i>Edit</a> in text form</p>
+
+                <p class="lead"> or <a class="btn" href="/login"><i class="icon-key"></i>Login</a> to
+                    synchronize config anywhere!</p>
+            </div>
             <%}%>
 
         </div>
@@ -136,7 +146,7 @@
         }
         render()
     </script>
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
