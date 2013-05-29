@@ -15,6 +15,7 @@
             color: #ffffff;
             padding: 0;
         }
+
         .row-fluid [class*="span"]:nth-child(3n+1) {
             margin-left: 0;
         }
@@ -50,35 +51,46 @@
         <div class="row-fluid">
             <div class="span12">
                 <h2>
-                    <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>About
+                    <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>关于
                 </h2>
 
                 <p>Hostd是面向DNS客户端的一个管理BlackHole的DNS配置的工具。</p>
 
                 <p>
-                    它提供Web页面和http接口，用户可以在hostd里修改DNS配置(仅对自己生效)，是一个跨平台的域名绑定工具，用于开发和生产环境的域名切换。它解决了hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
+                    用户可以在Hostd里修改DNS配置(仅对自己生效)，用于开发和生产环境的域名切换。它提供Web页面和http接口，是一个跨平台的域名绑定工具。它的目标是解决hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
 
                 <p></p>
             </div>
             <div class="span12">
                 <h2>
-                    <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Demo</h2>
+                    <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Hostd适合谁
+                </h2>
+                <ul>
+                    <li><p>公司内部，需要快速切换域名绑定，便于测试。</p></li>
+                    <li><p>移动开发者，需要对多个设备的域名绑定进行修改。</p></li>
+                    <li><p>Hostd需要在本地启动一个轻量级的server，如果你只想对本地的hosts进行管理，那么HostAdmin或者HostsPlus可能更适合你。但是Hostd支持域名通配符和正则表达式，或许也能满足你的需要。</p></li>
+                </ul>
 
-                <p>在示例中，我们尝试将"www.dianping.com"域名指向本地，以便测试。</p>
+            </div>
+            <div class="span12">
+                <h2>
+                    <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>示例</h2>
 
-                <p>hostd修改配置的界面如下(你可以尝试在下面窗口修改，或者<a href="http://42.96.139.35/z?z=MTI3LjAuMC4xCXd3dy5kaWFucGluZy5jb20="
+                <p>在日常开发中，我们常常会需要将线上机器的IP绑定到本地，以便测试。在示例中，我们尝试将"www.dianping.com"域名指向本地IP"127.0.0.1"。</p>
+
+                <p>hostd修改配置的界面如下(你可以尝试在下面窗口修改，或者<a href="http://42.96.139.35/z?z=IzEyNy4wLjAuMQl3d3cuZGlhbnBpbmcuY29t"
                                                     target="_blank">访问页面</a>)：</p>
-                                           </div>
-                <div class="span12">
-                    <iframe src="http://42.96.139.35/z?z=MTI3LjAuMC4xCXd3dy5kaWFucGluZy5jb20=" class="span10"
-                            height="300px" frameborder="0"></iframe>
-                </div>
-                <div class="span12">
-                    <p>
+            </div>
+            <div class="span12">
+                <iframe src="http://42.96.139.35/z?z=IzEyNy4wLjAuMQl3d3cuZGlhbnBpbmcuY29t" class="span10"
+                        height="300px" frameborder="0"></iframe>
+            </div>
+            <div class="span12">
+                <p>
 
-                    <p>然后使用nslookup进行测试。</p>
-                </div>
-                <div class="span12">
+                <p>点击选中"127.0.0.1"，然后使用nslookup进行测试。</p>
+            </div>
+            <div class="span12">
       <pre class="span10" id="code">
 
     nslookup www.dianping.com 42.96.139.35
@@ -89,17 +101,24 @@
     Name: www.dianping.com
     Address: 127.0.0.1
       </pre>
-                </div>
+            </div>
             <div class="span12">
                 <p>于是我们完成了修改！取消配置的选定，则会回到正常IP。</p>
 
                 <p>设置42.96.139.35为系统的dns服务器，即可达到动态修改域名解析的效果。</p>
 
-                <p>hostd会为某个IP地址维护单独的域名列表，无需担心域名绑定被他人修改。</p>
+                <p>hostd会<strong>为某个IP地址维护单独的域名列表</strong>，无需担心域名绑定被他人修改。</p>
             </div>
-            <h2>
-                <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Download</h2>
+            <div class="span12">
+                <h2>
+                    <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>示例</h2>
+        <pre class="span12" id="code">
+
+    curl -L http://code4craft.github.io/hostd/install.sh | bash
+                </pre>
+            </div>
         </div>
+
     </section>
 </div>
 
