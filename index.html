@@ -1,86 +1,129 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Hostd : Tools to custom your domain resolved rules. Used BlackHole as DNS server." />
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="description"
+          content="Hostd : Tools to custom your domain resolved rules. Used BlackHole as DNS server."/>
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
+    <style>
+        pre#code {
+            background-color: #373737;
+            color: #ffffff;
+            padding: 0;
+        }
+        .row-fluid [class*="span"]:nth-child(3n+1) {
+            margin-left: 0;
+        }
+    </style>
 
     <title>Hostd</title>
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/code4craft/hostd">View on GitHub</a>
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/code4craft/hostd">View on GitHub</a>
 
-          <h1 id="project_title">Hostd</h1>
-          <h2 id="project_tagline">Tools to custom your domain resolved rules. Used <a href="https://github.com/code4craft/blackhole" target="_blank">BlackHole</a>  as DNS server.</h2>
+        <h1 id="project_title">Hostd</h1>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/code4craft/hostd/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/code4craft/hostd/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <h2 id="project_tagline">Tools to custom your domain resolved rules. Used <a
+                href="https://github.com/code4craft/blackhole" target="_blank">BlackHole</a> as DNS server.</h2>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h2>
-<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>About</h2>
+        <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/code4craft/hostd/zipball/master">Download this project
+                as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/code4craft/hostd/tarball/master">Download this project
+                as a tar.gz file</a>
+        </section>
+    </header>
+</div>
 
-<p>Hostd是面向DNS客户端的一个管理BlackHole的DNS配置的工具。</p>
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <div class="row-fluid">
+            <div class="span12">
+                <h2>
+                    <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>About
+                </h2>
 
-<p>它提供Web页面和http接口，用户可以在hostd里修改DNS配置(仅对自己生效)，是一个跨平台的域名绑定工具，用于开发和生产环境的域名切换。它解决了hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
-<p></p>
+                <p>Hostd是面向DNS客户端的一个管理BlackHole的DNS配置的工具。</p>
 
-<h2>
-<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Demo</h2>
-      <p>在示例中，我们尝试将"www.dianping.com"域名指向本地，以便测试。</p>
-      <p>进入hostd页面，修改配置的界面如下：</p>
-      <iframe src="http://42.96.139.35/z?z=MTI3LjAuMC4xCXd3dy5kaWFucGluZy5jb20=" width="60%" height="300px" frameborder="0"></iframe>
-      <p>
-      <p>然后使用nslookup进行测试。</p>
-      <pre>
-           nslookup www.dianping.com 42.96.139.35
-           Server:   42.96.139.35
-           Address:  42.96.139.35#53
+                <p>
+                    它提供Web页面和http接口，用户可以在hostd里修改DNS配置(仅对自己生效)，是一个跨平台的域名绑定工具，用于开发和生产环境的域名切换。它解决了hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
 
-           Non-authoritative answer:
-           Name: www.dianping.com
-           Address: 127.0.0.1
+                <p></p>
+            </div>
+            <div class="span12">
+                <h2>
+                    <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+                <p>在示例中，我们尝试将"www.dianping.com"域名指向本地，以便测试。</p>
+
+                <p>hostd修改配置的界面如下(你可以尝试在下面窗口修改，或者<a href="http://42.96.139.35/z?z=MTI3LjAuMC4xCXd3dy5kaWFucGluZy5jb20="
+                                                    target="_blank">访问页面</a>)：</p>
+                                           </div>
+                <div class="span12">
+                    <iframe src="http://42.96.139.35/z?z=MTI3LjAuMC4xCXd3dy5kaWFucGluZy5jb20=" class="span10"
+                            height="300px" frameborder="0"></iframe>
+                </div>
+                <div class="span12">
+                    <p>
+
+                    <p>然后使用nslookup进行测试。</p>
+                </div>
+                <div class="span12">
+      <pre class="span10" id="code">
+
+    nslookup www.dianping.com 42.96.139.35
+    Server:   42.96.139.35
+    Address:  42.96.139.35#53
+
+    Non-authoritative answer:
+    Name: www.dianping.com
+    Address: 127.0.0.1
       </pre>
-      <p>于是我们完成了绑定。取消配置的选定，则会回到正常IP。</p>
-      <h2>
-<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Download</h2>
-      </section>
-    </div>
+                </div>
+            <div class="span12">
+                <p>于是我们完成了修改！取消配置的选定，则会回到正常IP。</p>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
+                <p>设置42.96.139.35为系统的dns服务器，即可达到动态修改域名解析的效果。</p>
+
+                <p>hostd会为某个IP地址维护单独的域名列表，无需担心域名绑定被他人修改。</p>
+            </div>
+            <h2>
+                <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Download</h2>
+        </div>
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
         <p class="copyright">Hostd maintained by <a href="https://github.com/code4craft">code4craft</a></p>
+
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+    </footer>
+</div>
 
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-41279861-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-41279861-1");
+        pageTracker._trackPageview();
+    } catch (err) {
+    }
+</script>
 
 
-  </body>
+</body>
 </html>
