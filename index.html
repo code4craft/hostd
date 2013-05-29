@@ -5,8 +5,9 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Hostd : Tools to custom your domain resolved rules. Used BlackHole as DNS server." />
-
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
 
     <title>Hostd</title>
   </head>
@@ -19,7 +20,7 @@
           <a id="forkme_banner" href="https://github.com/code4craft/hostd">View on GitHub</a>
 
           <h1 id="project_title">Hostd</h1>
-          <h2 id="project_tagline">Tools to custom your domain resolved rules. Used BlackHole as DNS server.</h2>
+          <h2 id="project_tagline">Tools to custom your domain resolved rules. Used <a href="https://github.com/code4craft/blackhole" target="_blank">BlackHole</a>  as DNS server.</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/code4craft/hostd/zipball/master">Download this project as a .zip file</a>
@@ -32,13 +33,33 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h2>
-<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Hostd</h2>
+<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>About</h2>
 
 <p>Hostd是面向DNS客户端的一个管理BlackHole的DNS配置的工具。</p>
 
 <p>它提供Web页面和http接口，用户可以在hostd里修改DNS配置(仅对自己生效)，是一个跨平台的域名绑定工具，用于开发和生产环境的域名切换。它解决了hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
+<p></p>
 
-<p>目前完成进度(70%)</p>
+<h2>
+<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Demo</h2>
+      <p>在示例中，我们尝试将"www.dianping.com"域名指向本地，以便测试。</p>
+      <p>进入hostd页面，修改配置的界面如下：</p>
+      <p>
+        <img src="./images/snap1.png" style="width:450px"/></p>
+      <p>然后使用nslookup进行测试。</p>
+      <pre>
+           nslookup www.dianping.com 42.96.139.35
+           Server:   42.96.139.35
+           Address:  42.96.139.35#53
+
+           Non-authoritative answer:
+           Name: www.dianping.com
+           Address: 127.0.0.1
+      </pre>
+      <p>于是我们完成了绑定。取消配置的选定，则会回到正常IP。</p>
+      <p>点击这里<a href="./demo.html">查看页面演示</a></p>
+      <h2>
+<a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>Download</h2>
       </section>
     </div>
 
