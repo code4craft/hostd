@@ -21,27 +21,24 @@
 
 <body>
 <div class="row-fluid">
-    <div class="span12">
+    <div style="margin-left: 0%" class="span12">
     <#assign tab="login">
         <#include "nav.ftl">
     </div>
-    <div class="span7 offset4">
-        <form class="navbar-form pull-left" action="/login" method="post">
-            <div class="span12">
-                <#--<div class="span5 offset3"><h2>&nbsp;登录</h2></div>-->
-            </div>
-            <div class="input-prepend span12">
+    <div style="margin-left: 0%" class="span12">
+        <#--<form class="navbar-form span12" action="/login" method="post">-->
+            <div style="margin-left: 0%" class="input-prepend span12">
                 <span class="add-on"><i class="icon-user"></i></span>
-                <input class="span12" id="username" placeholder="Please input username" type="text" name="username">
+                <input class="span11" id="username" placeholder="Please input username" type="text" name="username">
             </div>
-            <div class="input-prepend span12">
+            <div style="margin-left: 0%" class="input-prepend span12">
                 <span class="add-on"><i class="icon-lock"></i></span>
-                <input class="span12" id="password" type="password" name="password" placeholder="Please input password">
+                <input class="span11" id="password" type="password" name="password" placeholder="Please input password">
             </div>
-            <div class="span12 offset1"><input class="btn btn-primary" id="login-button" type="button" value="Login" name="Login"/>
+            <div class="span11 offset1"><input class="btn btn-primary" id="login-button" type="button" value="Login" name="Login"/>
                 <a class="btn offset2" href="/register">Sign Up</a>
             </div>
-        </form>
+        <#--</form>-->
     </div>
 </div>
 </body>
