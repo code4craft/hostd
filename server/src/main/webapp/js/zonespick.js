@@ -17,6 +17,12 @@ $(function () {
             doAdd();
         }
     })
+    $("#button-clear-domain").bind("click",function (){
+        $('#input-domain').val("")
+    })
+    $("#button-clear-ip").bind("click",function (){
+        $('#input-ip').val("")
+    })
 
 });
 

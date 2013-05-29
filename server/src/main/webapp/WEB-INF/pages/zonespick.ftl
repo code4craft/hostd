@@ -150,15 +150,18 @@
             <h3 id="myModalLabel">Add Config</h3>
         </div>
         <div class="modal-body">
-            <p><input class="span12" id="input-domain" placeholder="Please input domain" type="text" name="domain"></p>
+            <div class="input-append span12" style="margin-left: 0%">
+                <input class="span11" id="input-domain" placeholder="Please input domain" type="text" name="domain">
+                <span class="add-on"><a class="offset1" href="javascript:void(0)" id="button-clear-domain"><i class="icon-refresh"></i></a></span>
+            </div>
+            <div class="input-append span11" style="margin-left: 0%">
+                <input class="span12" id="input-ip" placeholder="Please input ip" type="text" name="ip"/>
+                <span class="add-on"><a class="offset1" href="javascript:void(0)" id="button-clear-ip"><i class="icon-refresh"></i></a></span>
+            </div>
 
-            <p><input class="span12" id="input-ip" placeholder="Please input ip" type="text" name="ip"
-                      class="typeahead" data-items="2" data-source="candidate"></p>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <div class="span12"></div>
+            <div class="span12"></div>
+            <div class="span12"></div>
         </div>
         <div class="modal-footer">
             <a href="javascript:void(0)" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
