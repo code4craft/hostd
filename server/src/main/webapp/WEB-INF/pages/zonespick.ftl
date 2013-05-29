@@ -28,13 +28,10 @@
 
     <script type="text/template" id="zones-template">
         <div class="span10 offset1" id="configs-container">
-            <div class="alert alert-info" style="height:30px">
+            <div class="alert alert-info">
                 <span>
                 Config has not effect? Set your DNS server to ${localIp} first. Learn <a href="/help/dns">how to set</a>.
                 </span>
-
-                <span class="pull-right"><a class="btn btn-primary" href="javascript:void(0)" id="button-new"><i
-                        class="icon-file"></i>New Domain</a></span>
             </div>
             <% if (zones.length>0)
             {
