@@ -68,7 +68,9 @@
                 <ul>
                     <li><p>企业内部，开发者需要快速切换域名绑定，便于测试。</p></li>
                     <li><p>移动开发者，需要对多个设备的域名绑定进行修改。</p></li>
-                    <li><p>如果你只想对本地的hosts进行管理，那么<a target="_blank" href="https://github.com/tg123/chrome-hostadmin">HostAdmin</a>或者<a target="_blank" href="https://github.com/yaniswang/hostsPlus">HostsPlus</a>可能更适合你，因为Hostd还需要在本地启动一个轻量级的server。但是Hostd支持域名通配符和正则表达式，或许也能满足你的需要。</p></li>
+                    <li><p>如果你只想对本地的hosts进行管理，那么<a target="_blank" href="https://github.com/tg123/chrome-hostadmin">HostAdmin</a>或者<a
+                            target="_blank" href="https://github.com/yaniswang/hostsPlus">HostsPlus</a>可能更适合你，因为Hostd还需要在本地启动一个轻量级的server。但是Hostd支持域名通配符和正则表达式，或许也能满足你的需要。
+                    </p></li>
                 </ul>
 
             </div>
@@ -77,16 +79,46 @@
                     <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>如何使用</h2>
 
                 <p>在日常开发中，我们常常会需要将线上机器的IP绑定到本地，以便测试。</p>
+
                 <p>使用Hostd完成这样的功能非常简单，点击这里<a target="_blank" href="demo.html">查看示例</a>。</p>
             </div>
             <div class="span12">
                 <h2>
-                    <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>安装</h2>
-                <p>自动安装：</p>
+                    <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>下载</h2>
+
+                <p>使用下面的命令进行自动下载和安装：</p>
+
+                <div class="span12">
         <pre class="span12" id="code">
 
-    curl -L http://code4craft.github.io/hostd/install.sh | sh
+    curl http://code4craft.github.io/hostd/install.sh | sh
                 </pre>
+                </div>
+                <div class="span12">
+                    <h2>
+                        <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>管理</h2>
+
+                    <p>启动blackhole:</p>
+                </div>
+                <div class="span12">
+                <pre class="span12" id="code">
+
+    sudo /usr/local/blackhole/blackhole.sh start
+                </pre>
+                </div>
+                <div class="span12">
+                    <p>启动Hostd：</p>
+                </div>
+                <div class="span12">
+                <pre class="span12" id="code">
+
+    sudo java -jar /usr/local/hostd/war4e.jar /usr/local/hostd/hostd-server-0.1.0.war -p 80 &
+                </pre>
+                </div>
+                <div class="span12">
+                    <p>Hostd是一个标准的Java Web项目，这里我们使用了一个jetty的轻量级封装(war4e.jar)作为容器，你也可以使用你常用的容器(例如Tomcat、Jboss)启动它。</p>
+                    <p>Hostd使用sqlite作为存储，所有的数据文件保存在/usr/local/hostd/zonesfile.db里。你也可以配置使用mysql来进行连接：解压hostd-server-0.1.0.war，并修改WEB-INF/classes/spring/applicationContext-myBatis.xml，配置datasource即可。</p>
+                </div>
             </div>
         </div>
 
