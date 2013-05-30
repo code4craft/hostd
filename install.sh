@@ -1,9 +1,9 @@
 #!/bin/sh
-HOME_DIR=/usr/local/blackhole3/
-BLACK_HOLE_URL=http://42.96.139.35/download/blackhole-1.2.0.tar.gz
-mkdir -p ${HOME_DIR}
-cd ${HOME_DIR}
-echo "start to download ${BLACK_HOLE_URL}"
-curl ${BLACK_HOLE_URL} > blackhole-1.2.0.tar.gz
-tar -xzf blackhole-1.2.0.tar.gz
-rm -f blackhole-1.2.0.tar.gz
+HOSTD_HOME=/usr/local/hostd/
+WAR4E_URL=http://code4craft.qiniudn.com/war4e.jar
+WAR_URL=http://code4craft.qiniudn.com/hostd-server-0.1.0.war
+curl http://code4craft.github.io/blackhole/install.sh | sh
+mkdir -p ${HOSTD_HOME}
+curl ${WAR4E_URL} > war4e.jar
+curl ${WAR_URL} > hostd-server-0.1.0.war
+curl http://code4craft.github.io/blackhole/zonesfile.db > zonesfile.db
