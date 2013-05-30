@@ -152,11 +152,11 @@
         <div class="modal-body">
             <div class="input-append span12" style="margin-left: 0%">
                 <input class="span11" id="input-domain" placeholder="Please input domain" type="text" name="domain">
-                <span class="add-on"><a class="offset1" href="javascript:void(0)" id="button-clear-domain"><i class="icon-refresh"></i></a></span>
+                <span class="add-on"><i id="button-clear-domain" style="color: #0480be" class="offset1 icon-refresh"></i></span>
             </div>
             <div class="input-append span11" style="margin-left: 0%">
                 <input class="span12" id="input-ip" placeholder="Please input ip" type="text" name="ip"/>
-                <span class="add-on"><a class="offset1" href="javascript:void(0)" id="button-clear-ip"><i class="icon-refresh"></i></a></span>
+                <span class="add-on"><i class="icon-refresh offset1" style="color: #0480be" id="button-clear-ip"></i></span>
             </div>
 
             <div class="span12"></div>
