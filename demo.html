@@ -8,6 +8,7 @@
           content="Hostd : Tools to custom your domain resolved rules. Used BlackHole as DNS server."/>
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png"/>
 
     <style>
         pre#code {
@@ -55,7 +56,8 @@
 
                 <p>在日常开发中，我们常常会需要将线上机器的IP绑定到本地，以便测试。在示例中，我们尝试将"www.dianping.com"域名指向本地IP"127.0.0.1"。</p>
 
-                    <p>首先，我们测试一下"www.dianping.com"现在的IP是多少。</p>
+                <p>首先，我们测试一下"www.dianping.com"现在的IP是多少。</p>
+
                 <div class="span12">
       <pre class="span12" id="code">
 
@@ -75,9 +77,10 @@
                     <p>这个结果来自google的DNS服务器8.8.8.8，BlackHole进行了一个代理和缓存。然后我们尝试修改这个DNS绑定。</p>
 
 
-                <p>hostd修改配置的界面如下(你可以尝试在下面窗口修改，或者<a href="http://42.96.139.35/z?z=IzEyNy4wLjAuMQl3d3cuZGlhbnBpbmcuY29t"
-                                                    target="_blank">访问页面</a>)：</p>
-                    </div>
+                    <p>hostd修改配置的界面如下(你可以尝试在下面窗口修改，或者<a
+                            href="http://42.96.139.35/z?z=IzEyNy4wLjAuMQl3d3cuZGlhbnBpbmcuY29t"
+                            target="_blank">访问页面</a>)：</p>
+                </div>
             </div>
             <div class="span12">
                 <iframe src="http://42.96.139.35/z?z=IzEyNy4wLjAuMQl3d3cuZGlhbnBpbmcuY29t" class="span10"
@@ -106,6 +109,10 @@
                 <p>设置42.96.139.35为系统的dns服务器，即可达到动态修改域名解析的效果。</p>
 
                 <p>hostd会<strong>为某个IP地址维护单独的域名列表</strong>，无需担心域名绑定被他人修改。</p>
+            </div>
+            <div class="span12">
+                <p>Hostd</p>
+                <p>对于企业用户，你可以在公司内部部署一个Hostd，并</p>
             </div>
         </div>
 
