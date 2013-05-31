@@ -8,7 +8,7 @@
           content="Hostd : Tools to custom your domain resolved rules. Used BlackHole as DNS server."/>
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png"/>
 
     <style>
         pre#code {
@@ -96,8 +96,11 @@
                 </div>
                 <div class="span12">
 
+                    <p>Hostd是一个标准的Java Web项目，这里我们使用了一个jetty的轻量级封装(<a href="https://github.com/code4craft/war4e">war4e.jar</a>)作为容器，你也可以使用你常用的容器(例如Tomcat、Jboss)启动它。
+                    </p>
                     <p>启动Hostd：</p>
                 </div>
+
                 <div class="span12">
                 <pre class="span12" id="code">
 
@@ -105,8 +108,7 @@
                 </pre>
                 </div>
                 <div class="span12">
-                    <p>Hostd是一个标准的Java Web项目，这里我们使用了一个jetty的轻量级封装(<a href="https://github.com/code4craft/war4e">war4e.jar</a>)作为容器，你也可以使用你常用的容器(例如Tomcat、Jboss)启动它。
-                    </p>
+
 
                     <p>
                         Hostd使用sqlite作为存储，所有的数据文件保存在/usr/local/hostd/zonesfile.db里。你也可以配置使用mysql来进行连接：解压hostd-server-0.1.0.war，并修改WEB-INF/classes/spring/applicationContext-myBatis.xml，配置datasource即可。</p>
