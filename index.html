@@ -55,12 +55,10 @@
                     <a name="hostd" class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>关于
                 </h2>
 
-                <p>Hostd是面向DNS客户端的一个管理BlackHole的DNS配置的工具。</p>
+                <p>Hostd是一个服务器端程序，它包括DNS服务器和Web服务器两部分。任何支持浏览器的设备都可以使用它，并自助修改DNS配置。每个用户的修改都是彼此独立的。</p>
 
-                <p>
-                    用户可以在Hostd里修改DNS配置(仅对自己生效)，用于开发和生产环境的域名切换。它提供Web页面和http接口，是一个跨平台的域名绑定工具。它的目标是解决hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
+                <p>Hostd的用途类似操作系统的hosts文件，它的目标是解决hosts配置管理不方便，以及移动设备难以修改hosts文件的问题。</p>
 
-                <p></p>
             </div>
             <div class="span12">
                 <h2>
@@ -70,7 +68,7 @@
                     <li><p>企业内部，开发者需要快速切换域名绑定，便于测试。</p></li>
                     <li><p>移动开发者，需要对多个设备的域名绑定进行修改。</p></li>
                     <li><p>如果你只想对本地的hosts进行管理，那么<a target="_blank" href="https://github.com/tg123/chrome-hostadmin">HostAdmin</a>或者<a
-                            target="_blank" href="https://github.com/yaniswang/hostsPlus">HostsPlus</a>可能更适合你，因为Hostd还需要在本地启动一个轻量级的server。但是Hostd支持域名通配符和正则表达式，或许也能满足你的需要。
+                            target="_blank" href="https://github.com/yaniswang/hostsPlus">HostsPlus</a>可能更适合你，因为Hostd还需要在额外启动一个轻量级的server。但是Hostd支持域名通配符和正则表达式，或许也能满足你的需要。
                     </p></li>
                 </ul>
 
@@ -103,8 +101,11 @@
                 <h2>
                     <a class="anchor" href="#hostd"><span class="octicon octicon-link"></span></a>协议</h2>
 
-                <p>Hostd包含的Web程序遵循<a href="http://opensource.org/licenses/Apache-2.0" target="_blank">Apache 2.0协议</a>。</p>
-                <p>Hostd包含的DNS服务器BlackHole遵循<a href="http://opensource.org/licenses/LGPL-3.0" target="_blank">LGPLv3协议</a>。</p>
+                <p>Hostd包含的Web程序遵循<a href="http://opensource.org/licenses/Apache-2.0" target="_blank">Apache 2.0协议</a>。
+                </p>
+
+                <p>Hostd包含的DNS服务器BlackHole遵循<a href="http://opensource.org/licenses/LGPL-3.0"
+                                               target="_blank">LGPLv3协议</a>。</p>
                 <!--<p>Hostd相关的文档遵循<a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">cc3.0协议</a>。</p>-->
 
             </div>
