@@ -23,6 +23,9 @@ $(function () {
     $("#button-clear-ip").bind("click", function () {
         $('#input-ip').val("")
     })
+    $("#button-clear-comment").bind("click", function () {
+        $('#input-comment').val("")
+    })
 
 });
 
