@@ -17,14 +17,28 @@ $(function () {
             doAdd();
         }
     })
-    $("#button-clear-domain").bind("click",function (){
+    $("#button-clear-domain").bind("click", function () {
         $('#input-domain').val("")
     })
-    $("#button-clear-ip").bind("click",function (){
+    $("#button-clear-ip").bind("click", function () {
         $('#input-ip').val("")
     })
 
 });
+
+function getConfigHtml(config) {
+    var innerHTML = "";
+    if (config.active) {
+        innerHTML += '<i style="color: #46a546" class="icon-ok"></i>&nbsp;' + config.ip;
+    }
+    else {
+        innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + config.ip;
+    }
+    if (config.comment != undefined && config.comment != "") {
+        innerHTML += '<span style="color: #93a1a1">&nbsp;&nbsp;&nbsp;('+config.comment+')</span>';
+    }
+    return innerHTML;
+}
 
 function bindCandidate() {
     domainCandidate = [];
@@ -73,7 +87,7 @@ function bindDelete(e) {
         var li = $(this).parent().parent();
         var domainIndex = li.attr("domain-index");
         var configIndex = li.attr("config-index");
-        var aa =BHzones[domainIndex].config.splice(configIndex,1);
+        var aa = BHzones[domainIndex].config.splice(configIndex, 1);
         if (BHzones[domainIndex].config.length == 0) {
 
             var ul = li.parent().parent().parent();
@@ -109,7 +123,8 @@ function doAdd() {
     var config = {
         active: false,
         domain: domain,
-        ip: ip
+        ip: ip,
+        comment: comment
     };
 
     if (domainIndex < data.length) {
@@ -124,9 +139,11 @@ function doAdd() {
             var configId = ul.children("li").length;
             data[i].config.push(config);
             var newLi = '<li class="ui-btn-up-a ui-btn-inner" data="' + ip + '" domain-index="' + domainIndex + '" config-index="' + configId + '">';
-            newLi += '\n<a class="ui-link-inherit" id="active-button" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip +'</a>';
-//            newLi += '<span style="color: #93a1a1">&nbsp;&nbsp;('+comment+')</span>';
-            newLi += '<span style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i class="icon-trash"></i></a></span></li>';
+            newLi += '\n<a class="ui-link-inherit" id="active-button" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip;
+            if (comment != "") {
+                newLi += '<span style="color: #93a1a1">&nbsp;&nbsp;(' + comment + ')</span>';
+            }
+            newLi += '</a><span style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i class="icon-trash"></i></a></span></li>';
             ul.children("li#configs").children("ul").append(newLi);
             bindAcitve(ul.find("li[config-index=" + configId + "]").children("a#active-button"))
             bindDelete(ul.find("li[config-index=" + configId + "]").find("a#delete-button"))
@@ -187,22 +204,12 @@ function bindAcitve(e) {
                 var config = configs[k];
                 if (config.active) {
                     config.active = false;
-                    changeSelect(li.parent("ul").children("[config-index=" + k + "]").children("a")[0], false, config.ip);
+                    li.parent("ul").children("[config-index=" + k + "]").children("a")[0].innerHTML=getConfigHtml(config);
                 }
             }
         }
         configs[j].active = finalStat;
-        changeSelect($(this)[0], finalStat, configs[j].ip);
+        $(this)[0].innerHTML= getConfigHtml(configs[j])
         pick(JSON.stringify(BHzones));
     });
-}
-
-function changeSelect(e, active, ip) {
-    if (active) {
-        e.innerHTML = '<i style="color: #46a546" class="icon-ok"></i>&nbsp;' + ip;
-    }
-    else {
-        e.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip;
-
-    }
 }

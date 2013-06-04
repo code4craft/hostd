@@ -2,6 +2,7 @@ package us.codecraft.blackhole.suite.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class UserZonesUtils {
         private String domain;
         private boolean active;
         private String ip;
+        private String comment;
 
         public DomainConfig() {
         }
@@ -28,6 +30,21 @@ public class UserZonesUtils {
             this.active = active;
             this.domain = domain;
             this.ip = ip;
+        }
+
+        public DomainConfig(String domain, String ip, String comment, boolean active) {
+            this.active = active;
+            this.domain = domain;
+            this.comment = comment;
+            this.ip = ip;
+        }
+
+        public String getComment() {
+            return comment;
+        }
+
+        public void setComment(String comment) {
+            this.comment = comment;
         }
 
         public boolean isActive() {
@@ -62,7 +79,7 @@ public class UserZonesUtils {
         for (Map<String, Object> objectMap : list) {
             List<Map> config = (List<Map>) objectMap.get("config");
             for (Map domainConfig : config) {
-                sb.append(((Boolean) domainConfig.get("active") ? "" : "#") + domainConfig.get("ip") + "\t" + domainConfig.get("domain") + "\n");
+                sb.append(((Boolean) domainConfig.get("active") ? "" : "#") + domainConfig.get("ip") + "\t" + domainConfig.get("domain") + (domainConfig.get("comment") != null && ((String) domainConfig.get("comment")).trim().length() > 0 ? "\t#" + domainConfig.get("comment") : "") + "\n");
             }
         }
         return sb.toString().trim();
@@ -84,14 +101,26 @@ public class UserZonesUtils {
             String[] tokens = line.split("\\s+");
             if (tokens.length > 1) {
                 String ip = tokens[0];
+                String comment = null;
+                //scan for commet
+                for (String token : tokens) {
+                    if (token.startsWith("#")) {
+                        comment = token.replaceAll("^#+", "");
+                        break;
+                    }
+                }
+
                 for (int i = 1; i < tokens.length; i++) {
                     String domain = tokens[i];
+                    if (domain.startsWith("#")) {
+                        continue;
+                    }
                     List<DomainConfig> domainConfigs = map.get(domain);
                     if (domainConfigs == null) {
                         domainConfigs = new ArrayList<DomainConfig>();
                         map.put(domain, domainConfigs);
                     }
-                    domainConfigs.add(new DomainConfig(domain, ip, isActive));
+                    domainConfigs.add(new DomainConfig(domain, ip, comment, isActive));
                 }
             }
         }
@@ -104,6 +133,7 @@ public class UserZonesUtils {
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
         return objectMapper.writeValueAsString(list);
     }
 
@@ -144,7 +174,7 @@ public class UserZonesUtils {
 
         for (Map.Entry<String, Map<String, Boolean>> mapEntry : linesMap.entrySet()) {
             for (Map.Entry<String, Boolean> entry : mapEntry.getValue().entrySet()) {
-                sb.append((entry.getValue() ? "" : "#") + entry.getKey()+"\t"+mapEntry.getKey() + "\n");
+                sb.append((entry.getValue() ? "" : "#") + entry.getKey() + "\t" + mapEntry.getKey() + "\n");
             }
         }
         return sb.toString().trim();
