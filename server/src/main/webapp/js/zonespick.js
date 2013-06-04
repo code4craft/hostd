@@ -44,8 +44,8 @@ function getConfigHtml(config) {
 }
 
 function bindCandidate() {
-    domainCandidate = [];
-    ipCandidate = [];
+    domainCandidate = domainCandidateDefault;
+    ipCandidate = ipCandidateDefault;
     buildCandidate()
     $('#input-domain').typeahead({
         source: domainCandidate,

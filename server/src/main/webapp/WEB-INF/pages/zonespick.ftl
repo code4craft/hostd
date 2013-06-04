@@ -16,6 +16,8 @@
     <script src="/js/baiduTemplate.js"></script>
     <script>
         BHzones =${zones};
+        domainCandidateDefault=[]
+        ipCandidateDefault=['127.0.0.1']
     </script>
 </head>
 
