@@ -158,6 +158,10 @@
                 <input class="span12" id="input-ip" placeholder="Please input ip" type="text" name="ip"/>
                 <span class="add-on"><i class="icon-refresh offset1" style="color: #0480be" id="button-clear-ip"></i></span>
             </div>
+            <#--<div class="input-append span11" style="margin-left: 0%">-->
+                <#--<input class="span12" id="input-comment" placeholder="comment here" type="text" name="comment"/>-->
+                <#--<span class="add-on"><i class="icon-refresh offset1" style="color: #0480be" id="button-clear-comment"></i></span>-->
+            <#--</div>-->
 
             <div class="span12"></div>
             <div class="span12"></div>

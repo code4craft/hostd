@@ -73,7 +73,7 @@ function bindDelete(e) {
         var li = $(this).parent().parent();
         var domainIndex = li.attr("domain-index");
         var configIndex = li.attr("config-index");
-        BHzones[domainIndex].config.pop(configIndex);
+        var aa =BHzones[domainIndex].config.splice(configIndex,1);
         if (BHzones[domainIndex].config.length == 0) {
 
             var ul = li.parent().parent().parent();
@@ -96,6 +96,7 @@ function bindNew(e) {
 function doAdd() {
     var domain = $("#input-domain").val();
     var ip = $("#input-ip").val();
+    var comment = $("#input-comment").val();
     var data = BHzones;
     var domainIndex = data.length;
     for (var i = 0; i < data.length; i++) {
@@ -123,7 +124,8 @@ function doAdd() {
             var configId = ul.children("li").length;
             data[i].config.push(config);
             var newLi = '<li class="ui-btn-up-a ui-btn-inner" data="' + ip + '" domain-index="' + domainIndex + '" config-index="' + configId + '">';
-            newLi += '\n<a class="ui-link-inherit" id="active-button" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip + '</a>';
+            newLi += '\n<a class="ui-link-inherit" id="active-button" href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ip +'</a>';
+//            newLi += '<span style="color: #93a1a1">&nbsp;&nbsp;('+comment+')</span>';
             newLi += '<span style="float:right;"><a class="ui-link-inherit" href="javascript:void(0)" id="delete-button">Delete<i class="icon-trash"></i></a></span></li>';
             ul.children("li#configs").children("ul").append(newLi);
             bindAcitve(ul.find("li[config-index=" + configId + "]").children("a#active-button"))
