@@ -14,9 +14,7 @@ import us.codecraft.blackhole.suite.model.JsonResult;
 import us.codecraft.blackhole.suite.model.UserPassport;
 import us.codecraft.blackhole.suite.service.UserPassportSerivce;
 import us.codecraft.blackhole.suite.service.UserZonesService;
-import us.codecraft.blackhole.suite.util.CookieUtils;
 import us.codecraft.blackhole.suite.util.UserPassportUtil;
-import us.codecraft.blackhole.suite.util.UserZonesUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +52,7 @@ public class LoginController extends MultiActionController {
         try {
             userPassport = userPassportSerivce.doLogin(username, password);
             UserPassportUtil.saveUserPassportCookie(response, userPassport);
-            mergeUserZones(request,response,userPassport);
+            userZonesService.mergeUserZones(request, response, userPassport);
             Map<String, Object> resultMap = JsonResult.success("Success！").toMap();
             resultMap.put("token", userPassport.getTicket());
             return resultMap;
@@ -63,14 +61,4 @@ public class LoginController extends MultiActionController {
         }
     }
 
-    //merge zones when not login to userZones
-    private void mergeUserZones(HttpServletRequest request, HttpServletResponse response,UserPassport userPassport) {
-        String userZones = userZonesService.getZones(userPassport);
-        String cookieZones = CookieUtils.getZones(request);
-        if (cookieZones != null) {
-            userZones = UserZonesUtils.merge(userZones, cookieZones);
-            userZonesService.updateZones(userPassport, userZones);
-            CookieUtils.saveZones(response,cookieZones);
-        }
-    }
 }

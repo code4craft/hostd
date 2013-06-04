@@ -13,8 +13,10 @@ import us.codecraft.blackhole.suite.exception.RegisterException;
 import us.codecraft.blackhole.suite.model.JsonResult;
 import us.codecraft.blackhole.suite.model.UserPassport;
 import us.codecraft.blackhole.suite.service.UserPassportSerivce;
+import us.codecraft.blackhole.suite.service.UserZonesService;
 import us.codecraft.blackhole.suite.util.UserPassportUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 import java.util.Map;
@@ -32,6 +34,9 @@ public class RegisterController extends MultiActionController {
     private UserPassportSerivce userPassportSerivce;
 
     @Autowired
+    private UserZonesService userZonesService;
+
+    @Autowired
     private MessageSource messageSource;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -42,12 +47,13 @@ public class RegisterController extends MultiActionController {
 
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Object doRegister(HttpServletResponse response, @RequestParam("username") String username, @RequestParam("password") String password) {
+    public Object doRegister(HttpServletRequest request, HttpServletResponse response, @RequestParam("username") String username, @RequestParam("password") String password) {
         UserPassport userPassport = null;
         try {
             userPassport = userPassportSerivce.addUserPassport(username, password);
             UserPassportUtil.saveUserPassportCookie(response, userPassport);
             Map<String, Object> resultMap = JsonResult.success("Sign up success！").toMap();
+            userZonesService.mergeUserZones(request, response, userPassport);
             resultMap.put("token", userPassport.getTicket());
             return resultMap;
         } catch (RegisterException e) {

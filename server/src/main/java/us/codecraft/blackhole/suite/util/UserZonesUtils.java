@@ -150,7 +150,7 @@ public class UserZonesUtils {
         String[] linesA = textA.split("\n");
         String[] linesB = textB.split("\n");
         // domain-ip-active
-        DoubleKeyMap<String, String, Boolean> linesMap = new DoubleKeyMap<String, String, Boolean>(new LinkedHashMap<String, Map<String, Boolean>>(), LinkedHashMap.class);
+        DoubleKeyMap<String, String, DomainConfig> linesMap = new DoubleKeyMap<String, String, DomainConfig>(new LinkedHashMap<String, Map<String, DomainConfig>>(), LinkedHashMap.class);
         for (String line : linesA) {
             extractLine(linesMap, line);
         }
@@ -159,29 +159,31 @@ public class UserZonesUtils {
         }
         StringBuilder sb = new StringBuilder();
         //only one config can be active for a domain
-        for (Map.Entry<String, Map<String, Boolean>> mapEntry : linesMap.entrySet()) {
+        for (Map.Entry<String, Map<String, DomainConfig>> mapEntry : linesMap.entrySet()) {
             boolean hasOneActive = false;
-            for (Map.Entry<String, Boolean> entry : mapEntry.getValue().entrySet()) {
-                if (entry.getValue()) {
+            for (Map.Entry<String, DomainConfig> entry : mapEntry.getValue().entrySet()) {
+                if (entry.getValue().isActive()) {
                     if (!hasOneActive) {
                         hasOneActive = true;
                     } else {
-                        entry.setValue(false);
+                        entry.getValue().setActive(false);
                     }
                 }
             }
         }
 
-        for (Map.Entry<String, Map<String, Boolean>> mapEntry : linesMap.entrySet()) {
-            for (Map.Entry<String, Boolean> entry : mapEntry.getValue().entrySet()) {
-                sb.append((entry.getValue() ? "" : "#") + entry.getKey() + "\t" + mapEntry.getKey() + "\n");
+        for (Map.Entry<String, Map<String, DomainConfig>> mapEntry : linesMap.entrySet()) {
+            for (Map.Entry<String, DomainConfig> entry : mapEntry.getValue().entrySet()) {
+                sb.append((entry.getValue().isActive() ? "" : "#") + entry.getKey() + "\t" + mapEntry.getKey() +
+                        (!StringUtils.isBlank(entry.getValue().getComment()) ? "\t#" + entry.getValue().getComment() : "") + "\n");
             }
         }
         return sb.toString().trim();
     }
 
-    private static void extractLine(DoubleKeyMap<String, String, Boolean> linesMap, String line) {
+    private static void extractLine(DoubleKeyMap<String, String, DomainConfig> linesMap, String line) {
         boolean isActive = true;
+        String comment = null;
         line = StringUtils.trim(line);
         if (StringUtils.startsWith(line, "#")) {
             isActive = false;
@@ -190,10 +192,23 @@ public class UserZonesUtils {
         String[] tokens = line.split("\\s+");
         if (tokens.length > 1) {
             String ip = tokens[0];
+            for (String token : tokens) {
+                if (token.startsWith("#")) {
+                    comment = token.replaceAll("^#+", "");
+                    break;
+                }
+            }
             for (int i = 1; i < tokens.length; i++) {
                 String domain = tokens[i];
-                if (linesMap.get(domain, ip) == null || !linesMap.get(domain, ip)) {
-                    linesMap.put(domain, ip, isActive);
+                if (domain.startsWith("#")) {
+                    continue;
+                }
+                if (linesMap.get(domain, ip) == null) {
+                    linesMap.put(domain, ip, new DomainConfig(domain, ip, comment, isActive));
+                } else {
+                    if ((!linesMap.get(domain, ip).isActive() && isActive) || (StringUtils.isBlank(linesMap.get(domain, ip).getComment()) && StringUtils.isNotBlank(comment))) {
+                        linesMap.put(domain, ip, new DomainConfig(domain, ip, comment, isActive));
+                    }
                 }
             }
         }
