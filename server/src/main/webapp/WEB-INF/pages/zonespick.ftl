@@ -180,7 +180,7 @@
                                         id="button-clear-comment"></i></span>
             </div>
 
-            <div class="span12"></div>
+            <div style="margin-left: 0%" class="span12 alert alert-info hide" id="input-error"></div>
             <div class="span12"></div>
             <div class="span12"></div>
         </div>

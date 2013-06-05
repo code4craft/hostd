@@ -26,10 +26,10 @@ $(function () {
     $("#button-clear-comment").bind("click", function () {
         $('#input-comment').val("")
     })
-    $("#button-share").bind("click",function (){
+    $("#button-share").bind("click", function () {
         var reg = /_zones=([^;]+)/;
         var zones = reg.exec(document.cookie)
-        $("#config-share-url").val(window.location.origin+"/z?z="+zones[1])
+        $("#config-share-url").val(window.location.origin + "/z?z=" + zones[1])
         $('#shareModal').modal('show');
     });
 
@@ -44,7 +44,7 @@ function getConfigHtml(config) {
         innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + config.ip;
     }
     if (config.comment != undefined && config.comment != "") {
-        innerHTML += '<span style="color: #93a1a1">&nbsp;&nbsp;&nbsp;('+config.comment+')</span>';
+        innerHTML += '<span style="color: #93a1a1">&nbsp;&nbsp;&nbsp;(' + config.comment + ')</span>';
     }
     return innerHTML;
 }
@@ -113,6 +113,7 @@ function bindNew(e) {
         var li = $(this).parent().parent();
         $("input#input-domain").val(li.attr("data-domain"));
         $('#addModal').modal('show');
+        $("#input-error").addClass("hide");
     });
 }
 
@@ -120,6 +121,21 @@ function doAdd() {
     var domain = $("#input-domain").val();
     var ip = $("#input-ip").val();
     var comment = $("#input-comment").val();
+    if (domain==""){
+        $("#input-error").html("Sorry,domain can't be empty.");
+        $("#input-error").removeClass("hide");
+        return;
+    }
+    if (ip==""){
+        $("#input-error").html("Sorry,ip can't be empty.");
+        $("#input-error").removeClass("hide");
+        return;
+    }
+    if (comment.indexOf(" ")>0) {
+        $("#input-error").html("Sorry, whitespace is not supported for comment yet.");
+        $("#input-error").removeClass("hide");
+        return;
+    }
     var data = BHzones;
     var domainIndex = data.length;
     for (var i = 0; i < data.length; i++) {
@@ -213,12 +229,12 @@ function bindAcitve(e) {
                 var config = configs[k];
                 if (config.active) {
                     config.active = false;
-                    li.parent("ul").children("[config-index=" + k + "]").children("a")[0].innerHTML=getConfigHtml(config);
+                    li.parent("ul").children("[config-index=" + k + "]").children("a")[0].innerHTML = getConfigHtml(config);
                 }
             }
         }
         configs[j].active = finalStat;
-        $(this)[0].innerHTML= getConfigHtml(configs[j])
+        $(this)[0].innerHTML = getConfigHtml(configs[j])
         pick(JSON.stringify(BHzones));
     });
 }
