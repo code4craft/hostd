@@ -117,6 +117,13 @@ function bindNew(e) {
     });
 }
 
+
+function validIp(ip){
+    var ipReg=/[1-2]{0,1}[0-9]{1,2}\.[1-2]{0,1}[0-9]{1,2}\.[1-2]{0,1}[0-9]{1,2}\.[1-2]{0,1}[0-9]{1,2}/;
+    return ipReg.test(ip)
+}
+
+
 function doAdd() {
     var domain = $("#input-domain").val();
     var ip = $("#input-ip").val();
@@ -128,6 +135,11 @@ function doAdd() {
     }
     if (ip==""){
         $("#input-error").html("Sorry,ip can't be empty.");
+        $("#input-error").removeClass("hide");
+        return;
+    }
+    if (!validIp(ip)){
+        $("#input-error").html("Please input a valid ip address.");
         $("#input-error").removeClass("hide");
         return;
     }
