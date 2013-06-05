@@ -31,7 +31,11 @@ $(function () {
         var zones = reg.exec(document.cookie)
         $("#config-share-url").val(window.location.origin + "/z?z=" + zones[1])
         $('#shareModal').modal('show');
+        $("#config-share-url").select()
     });
+    $("#config-share-url").bind("click",function(){
+        $(this).select();
+    })
 
 });
 
