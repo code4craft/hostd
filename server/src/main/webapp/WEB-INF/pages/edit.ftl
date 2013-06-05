@@ -72,6 +72,13 @@
 
                 <p>Commented line is a candidate for choice.</p>
             </li>
+            <li>
+                <p>"#" in line for comment of config</p>
+
+                <p>e.g. #127.0.0.1 t.dianping.com #local test</p>
+
+                <p>'local test' is comment of this line.</p>
+            </li>
         </ul>
     </div>
 </div>

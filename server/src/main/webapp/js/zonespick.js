@@ -26,6 +26,12 @@ $(function () {
     $("#button-clear-comment").bind("click", function () {
         $('#input-comment').val("")
     })
+    $("#button-share").bind("click",function (){
+        var reg = /_zones=([^;]+)/;
+        var zones = reg.exec(document.cookie)
+        $("#config-share-url").val(window.location.origin+"/z?z="+zones[1])
+        $('#shareModal').modal('show');
+    });
 
 });
 

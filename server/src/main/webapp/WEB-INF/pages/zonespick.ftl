@@ -16,8 +16,8 @@
     <script src="/js/baiduTemplate.js"></script>
     <script>
         BHzones =${zones};
-        domainCandidateDefault=[]
-        ipCandidateDefault=['127.0.0.1']
+        domainCandidateDefault = []
+        ipCandidateDefault = ['127.0.0.1'];
     </script>
 </head>
 
@@ -139,7 +139,8 @@
             </li>
         </ul>
     </script>
-    <div id="container"></div>
+    <div id="container">
+    </div>
     <script type="text/javascript">
         function render() {
             var data = {
@@ -151,6 +152,11 @@
         }
         render()
     </script>
+    <div class="span10 offset1">
+        <p></p>
+
+        <p><a href="javascript:void(0)" class="btn" id="button-share"><i class="icon-share" style="color: #0480be"></i>Share</a></p>
+    </div>
     <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-header">
@@ -160,15 +166,18 @@
         <div class="modal-body">
             <div class="input-append span12" style="margin-left: 0%">
                 <input class="span11" id="input-domain" placeholder="Please input domain" type="text" name="domain">
-                <span class="add-on"><i id="button-clear-domain" style="color: #0480be" class="offset1 icon-refresh"></i></span>
+                <span class="add-on"><i id="button-clear-domain" style="color: #0480be"
+                                        class="offset1 icon-refresh"></i></span>
             </div>
             <div class="input-append span11" style="margin-left: 0%">
                 <input class="span12" id="input-ip" placeholder="Please input ip" type="text" name="ip"/>
-                <span class="add-on"><i class="icon-refresh offset1" style="color: #0480be" id="button-clear-ip"></i></span>
+                <span class="add-on"><i class="icon-refresh offset1" style="color: #0480be"
+                                        id="button-clear-ip"></i></span>
             </div>
             <div class="input-append span11" style="margin-left: 0%">
                 <input class="span12" id="input-comment" placeholder="comment here" type="text" name="comment"/>
-                <span class="add-on"><i class="icon-refresh offset1" style="color: #0480be" id="button-clear-comment"></i></span>
+                <span class="add-on"><i class="icon-refresh offset1" style="color: #0480be"
+                                        id="button-clear-comment"></i></span>
             </div>
 
             <div class="span12"></div>
@@ -178,6 +187,20 @@
         <div class="modal-footer">
             <a href="javascript:void(0)" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
             <a href="javascript:void(0)" id="button-do-add" class="btn btn-primary">Add</a>
+        </div>
+
+    </div>
+    <div id="shareModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Share Config</h3>
+        </div>
+        <div class="modal-body">
+            <div class="input-append span12" style="margin-left: 0%">
+                <input class="span11" id="config-share-url" type="text" name="domain">
+            </div>
+            <p>Copy the url to share your config with others!</p>
         </div>
 
     </div>
