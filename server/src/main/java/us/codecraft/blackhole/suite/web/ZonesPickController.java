@@ -48,6 +48,7 @@ public class ZonesPickController extends MultiActionController {
             zones = CookieUtils.getZones(request);
         }
         if (StringUtils.isBlank(zones) && !StringUtils.isBlank(zonesBase64)) {
+            zonesBase64 = zonesBase64.replaceAll("^\"","").replaceAll("\"$","");
             BASE64Decoder base64Decoder = new BASE64Decoder();
             zones = new String(base64Decoder.decodeBuffer(zonesBase64), "utf-8");
             CookieUtils.saveZones(response, zones);

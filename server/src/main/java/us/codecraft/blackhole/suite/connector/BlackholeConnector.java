@@ -37,6 +37,7 @@ public class BlackholeConnector implements InitializingBean {
             line = StringUtils.substringAfterLast(line, ":");
         }
         line = StringUtils.trim(line);
+        line = line.replaceAll("\\s+#[^\\s]+", "");
         line = line.replaceAll("\\s+", "_");
         wifeSays.say(ADD_ZONES_IP + ip + ":" + line);
     }
