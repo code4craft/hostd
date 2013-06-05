@@ -131,21 +131,25 @@ function doAdd() {
     if (domain==""){
         $("#input-error").html("Sorry,domain can't be empty.");
         $("#input-error").removeClass("hide");
+        $("input#input-domain").select();
         return;
     }
     if (ip==""){
         $("#input-error").html("Sorry,ip can't be empty.");
         $("#input-error").removeClass("hide");
+        $("input#input-ip").select();
         return;
     }
     if (!validIp(ip)){
         $("#input-error").html("Please input a valid ip address.");
         $("#input-error").removeClass("hide");
+        $("input#input-ip").select();
         return;
     }
     if (comment.indexOf(" ")>0) {
         $("#input-error").html("Sorry, whitespace is not supported for comment yet.");
         $("#input-error").removeClass("hide");
+        $("input#input-comment").select();
         return;
     }
     var data = BHzones;
