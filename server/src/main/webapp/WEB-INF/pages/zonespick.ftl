@@ -14,6 +14,7 @@
     <script src="/js/zonespick.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/baiduTemplate.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
     <script>
         BHzones =${zones};
         domainCandidateDefault = []

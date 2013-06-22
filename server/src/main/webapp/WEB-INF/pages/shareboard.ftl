@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/codemirror.css">
     <link rel="stylesheet" href="/css/shareboard.css">
     <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
     <script>
         BHzones=${data};
     </script>

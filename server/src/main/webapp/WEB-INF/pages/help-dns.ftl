@@ -12,6 +12,7 @@
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/common-action.js"></script>
     <script src="/js/zonespick.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
 </head>
 
 <body>

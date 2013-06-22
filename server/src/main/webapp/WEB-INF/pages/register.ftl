@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
 </head>
 
 <body>
